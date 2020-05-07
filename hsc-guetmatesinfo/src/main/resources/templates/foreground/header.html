@@ -1,0 +1,217 @@
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<!--头部导航栏开始-->
+<nav th:fragment="header" >
+    <!-- HEADER IOP -->
+    <div class="header-one">
+        <div class="headertop-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div th:if="${user}" class="userinfo">
+                        <nav  class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                            <div class="navbar-header">
+
+                            </div>
+                            <ul class="nav navbar-top-links navbar-right welcome-message">
+                                <li class="dropdown user-menu">
+                                    <a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
+                                        <img style="width:30px;height:30px" src="images/profile.jpg" class="img-circle" >
+                                        <span class="hidden-xs" th:text="${user.username}"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="mt5">
+                                            <a href="/profile" class="menuItem" data-index="64">
+                                                <i class="fa fa-user"></i> 个人中心</a>
+                                        </li>
+                                        <li>
+                                            <a onclick="resetPwd()">
+                                                <i class="fa fa-key"></i> 修改密码</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="logout">
+                                                <i class="fa fa-sign-out"></i> 退出登录</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+
+                    </div>
+
+                    <div th:if="${user==null}"class="userinfo">
+
+
+                        <a  href="#" class="sign-in" id="login-link">登录</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- HEADER IOP -->
+
+    <!-- HEADER -->
+    <div class="header-wrapper">
+        <div class="container">
+            <div class="row">
+
+                <!-- Logo -->
+                <div class="span8">
+                    <div class="logo">
+
+                        <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- HEADER -->
+    <!-- Main Navigation -->
+    <div class="nav-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <nav class="Navigationnav">
+                        <ul>
+                            <li><a th:href="@{/}">首页 </a>
+                            </li>
+                            <li><a th:href="@{/xyhd}">关于我们</a>
+                                <ul class="clearfix">
+                                    <li><a href="profile.html">学校情况</a></li>
+                                    <li><a href="profile.html">总会简介</a></li>
+                                    <li><a href="profile.html">组织机构</a></li>
+                                    <li><a href="profile.html">地方分会</a></li>
+                                    <li><a href="profile.html">行业协会</a></li>
+                                    <li><a href="profile.html">规章制度</a></li>
+                                    <li><a href="profile.html">校友之家</a></li>
+                                    <li><a href="profile.html">联系我们</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">新闻公告</a>
+                                <ul class="clearfix">
+                                    <li><a href="#">新闻动态</a></li>
+                                    <li><a href="#">总会公告 </a></li>
+                                    <li><a href="#">活动预告 </a> </li>
+                                </ul></li>
+                            <li>
+                                <a th:href="@{/xyhd}">校友活动</a>
+
+                            </li>
+                            <li><a href="#">校友风采</a>
+                                <ul class="clearfix">
+                                    <li><a href="#">桂电人</a></li>
+                                    <li><a href="#">校友企业 </a></li>
+                                    <li><a href="#">桂电故事 </a> </li>
+                                </ul>
+                            </li>
+                            <li><a href="#">校友服务</a>
+                                <ul class="clearfix">
+                                    <li><a href="#">返校指南</a></li>
+                                    <li><a href="#">校友招聘 </a></li>
+                                    <li><a href="#">校友卡申请 </a> </li>
+                                    <li><a href="#">校友通讯 </a> </li>
+                                </ul>
+                            </li>
+                            <li><a href="#">校基金会</a>
+                                <ul class="clearfix">
+                                    <li><a href="#">基金会概况</a></li>
+                                    <li><a href="#">理事会构成 </a></li>
+                                    <li><a href="#">信息公开 </a> </li>
+                                    <li><a href="#">捐赠指南 </a> </li>
+                                    <li><a href="#">捐赠项目</a></li>
+                                    <li><a href="#">捐赠鸣谢 </a></li>
+                                    <li><a href="#">报账流程 </a> </li>
+                                    <li><a href="#">联系我们 </a> </li>
+                                </ul>
+
+                            </li>
+                            <li><a th:if="${user}" th:href="@{/note}">留言栏</a>
+                                <a href="#" th:if="${user==null}" id="login-link1"  >留言栏</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!--响应式导航栏-->
+                    <div class="responsive_nav">
+                        <ul>
+                            <li class="open">
+                                <a >首页</a>
+                                <ul>
+                                    <li><a href="/" onclick="window.location = '/' " >首页 </a></li>
+                                    <li><a href="#">新闻动态</a></li>
+                                    <li><a href="#">总会公告 </a></li>
+                                    <li><a href="#" onclick="window.location = '/xyhd' " >校友活动 </a> </li>
+                                    <li><a href="#">桂电人</a></li>
+                                    <li><a href="#">校友企业 </a></li>
+                                    <li><a href="#">桂电故事 </a> </li>
+                                    <li><a href="#">返校指南</a></li>
+                                    <li><a href="#">校友招聘 </a></li>
+                                    <li><a href="#">校友卡申请 </a> </li>
+                                    <li><a href="#">校友通讯 </a> </li>
+                                    <li><a href="#">基金会概况</a></li>
+                                    <li><a href="#">理事会构成 </a></li>
+                                    <li><a href="#">信息公开 </a> </li>
+                                    <li><a href="#">捐赠指南 </a> </li>
+                                    <li><a href="#">捐赠项目</a></li>
+                                    <li><a href="#">捐赠鸣谢 </a></li>
+                                    <li><a href="#">报账流程 </a> </li>
+                                    <li><a th:if="${user}" onclick="window.location = '/note' " th:href="@{/note}">留言栏</a>
+                                        <a href="#" th:if="${user==null}" id="login-link2"  >留言栏</a>
+                                    </li>
+                                    <li class="last"><a href="#">联系我们 </a> </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Navigation -->
+    <!-- HEADER -->
+
+    <!--                login-popup-->
+    <div class="login-popup-wrapper">
+        <div id="login-popup">
+            <a href="#" class="close">关闭</a>
+            <h2>校友登录</h2>
+            <form  method="post" action="/login">
+                <input type="text" value="" name="username" id="username" placeholder="用户名或邮箱" />
+                <input type="text" value="" name="password" id="password" placeholder="密码" />
+                <!--                            <input type="text" value="" id="check" placeholder="验证码" /> <img src="Images">-->
+                <input type="checkbox" name="remarks" checked="checked" id="chkmate" value="0"onclick="CheckStatus(this.value)">
+                校友
+                <input type="checkbox" name="remarks"  id="chkadmin" value="1" onclick="CheckStatus(this.value)">
+                管理员
+                <br>
+                <br>
+                <input type="submit" class="landing"  value="登录" id="login-button"/>
+            </form>
+            没有注册为校友？点击
+            <a style="font-size: 18px" th:href="@{/toregister}"  target="_blank" class="signup-link" >注册</a>
+
+        </div>
+    </div>
+
+<script type="text/javascript">
+    //Login
+    //复选框二选一
+    function CheckStatus(value) {
+        if (value == 0) {
+            document.getElementById("chkmate").checked = true;
+            document.getElementById("chkadmin").checked = false;
+        }
+        if (value == 1) {
+            document.getElementById("chkmate").checked = false;
+            document.getElementById("chkadmin").checked = true;
+        }
+    }
+
+</script>
+
+
+
+</nav>
+
+<!--头部导航栏结束-->

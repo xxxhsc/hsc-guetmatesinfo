@@ -1,0 +1,165 @@
+
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:digits="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <!-- meta data -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+        <!--font-family-->
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;subset=devanagari,latin-ext" rel="stylesheet">
+        
+        <!-- title of site -->
+        <title>Sign up</title>
+
+        <!-- For favicon png -->
+		<link rel="shortcut icon" type="image/icon" href="logo/favicon.png"/>
+       
+        <!--font-awesome.min.css-->
+        <link rel="stylesheet" href="css/register/font-awesome.min.css">
+		
+		<!--animate.css-->
+        <link rel="stylesheet" href="css/register/animate.css">
+		
+        <!--bootstrap.min.css-->
+        <link rel="stylesheet" href="css/register/bootstrap.min.css">
+		
+		<!-- bootsnav -->
+		<link rel="stylesheet" href="css/register/bootsnav.css" >
+        
+        <!--style.css-->
+        <link rel="stylesheet" href="css/register/style.css">
+        
+        <!--responsive.css-->
+        <link rel="stylesheet" href="css/register/responsive.css">
+        
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		
+        <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+	
+	<body>
+		<!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+		
+		<!-- signin end -->
+		<section class="signin signup popup-in pop-up">
+			<div class="container">
+
+				<div class="sign-content popup-in-content">
+					<div class="popup-in-txt">
+						<h2>认证注册</h2>
+						<form id="myform" method="post" action="/register">
+						<div class="signin-form">
+							<div class=" ">
+								<div class=" ">
+
+										<div class="form-group">
+										    <label for="sname">姓名</label>
+										    <input type="text" minlength="2" class="form-control" name="myname" id="sname" placeholder="学籍中姓名" required>
+										</div><!--/.form-group -->
+										<div class="form-group">
+											<label for="snumber">学号</label>
+										    <input type="text" maxlength="10" digits:true class="form-control" id="snumber" placeholder="学籍中学号" required>
+										</div><!--/.form-group -->
+										<div class="form-group">
+											<label >性别</label>
+										    <!--<input type="text" name="sex" class="form-control" id="signin_form3" placeholder="学籍中性别" >-->
+											<select class="form-control m-b" name="sex" placeholder="学籍中性别">
+												<option>男</option>
+												<option>女</option>
+												<option>未知</option>
+											</select>
+										</div><!--/.form-group -->
+										<div class="form-group">
+											<label for="signin_form4">院系</label>
+										    <input type="text" class="form-control" id="signin_form4" placeholder="学籍中院系(例：计算机与安全学院)" required>
+										</div><!--/.form-group -->
+										<div class="form-group">
+											<label for="smajor">专业</label>
+											<input type="text" name="major" class="form-control" id="smajor" placeholder="学籍中专业（例：软件工程）" required>
+										</div><!--/.form-group -->
+										<div class="form-group">
+											<label for="semail">邮箱</label>
+											<input type="email" name="email" class="form-control" id="semail" placeholder="用于方便联系或找回密码的邮箱" required>
+										</div><!--/.form-group -->
+
+								</div><!--/.col -->
+							</div><!--/.row -->
+
+						</div>
+
+						<div class="signin-footer">
+							<button type="submit" class="btn signin_btn signin_btn_two" id="signin-button">
+							注册并认证
+							</button>
+							<p>
+								已经注册并认证?
+								<a th:href="@{/}" >登录</a>
+							</p>
+						</div><!--/.signin-footer -->
+						</form><!--/form -->
+					</div><!-- .popup-in-txt -->
+				</div><!--/.sign-content -->
+			</div><!--/.container -->
+
+		</section><!--/.signin -->
+		
+		<!-- signin end -->
+
+
+
+
+
+
+
+
+		<!--footer copyright start -->
+		<footer class="footer-copyright">
+			<div id="scroll-Top">
+				<i class="fa fa-angle-double-up return-to-top" id="scroll-top2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>
+			</div><!--/.scroll-Top-->
+
+		</footer><!--/.hm-footer-copyright-->
+		<!--footer copyright  end -->
+
+
+		 <!-- Include all js compiled plugins (below), or include individual files as needed -->
+
+
+        
+        <!--modernizr.min.js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+
+		<script src="js/register/jquery.js"></script>
+		<!--bootstrap.min.js-->
+        <script src="js/register/bootstrap.min.js"></script>
+		<!-- bootsnav js -->
+		<script src="js/register/bootsnav.js"></script>
+		<!-- jquery.sticky.js -->
+		<script src="js/register/jquery.sticky.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+		<!-- jquery-validate 表单验证插件 -->
+		<script src="js/register/jquery.validate.min.js"></script>
+		<script src="js/register/messages_zh.min.js"></script>
+		<script src="js/register/jquery.validate.extend.js"></script>
+
+        <!--Custom JS-->
+        <script src="js/register/custom.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#myform").validate();
+			});
+		</script>
+    </body>
+	
+</html>

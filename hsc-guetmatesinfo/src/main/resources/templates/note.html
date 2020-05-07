@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<!--[if IE 7]>    <html class="ie7" > <![endif]-->
+<!--[if IE 8]>    <html class="ie8" > <![endif]-->
+<!--[if IE 9]>    <html class="ie9" > <![endif]-->
+<!--[if IE 9]>    <html class="ie10" > <![endif]-->
+<!--[if (gt IE 10)|!(IE)]>&lt;!&ndash;dash;&gt; <html lang="en-US"> &lt;!&ndash;<![endif]-->
+<head>
+    <!-- META TAGS -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Title -->
+    <title>桂林电子科技大学校友网</title>
+
+    <!-- Style Sheet-->
+
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/flexslider.css">
+
+
+
+
+    <!--[if lt IE 9]>
+
+
+    <![endif]-->
+</head>
+<body>
+<!-- HEADER TOP -->
+<div id="top"></div>
+
+<!-- HEADER IOP -->
+
+<!-- HEADER -->
+<nav  th:include="foreground/header :: header"  ></nav>
+<!-- HEADER -->
+
+<!-- Crum -->
+<div class="crum-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <a href="">首页</a>
+
+                <span class="crum"><a href="">校友活动</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Crum-->
+
+
+
+<!-- Grid page -->
+<div class="content booking_wrap">
+    <div class="container">
+        <div class="row">
+            <div class="span12 booking clearfix">
+                <div class="top">
+                    <h2>留言栏</h2>
+
+
+                </div>
+                <div class="bottom clearfix">
+                    <div >
+
+                        <!--留言列表-->
+
+
+
+                        <!--            留言发送输入框-->
+                        <div class="card-body">
+                            <input type="hidden" name="parentCommentId" value="-1" id="parentCommentId">
+                            <input type="hidden" name="replyCommentId" value="-1" id="replyCommentId">
+                            <input type="hidden" name="uid" th:value="${user.id}" id="uid">
+                            <!--            输入框-->
+                            <div id="noteEdit">
+                                <textarea name="content" id="content" placeholder="说点什么。。。"></textarea>
+                            </div>
+
+                            <!--提交列表-->
+                            <div class="container-fluid m-0 mt-3 p-0 h-100">
+
+
+                                <input class="btn btn-primary btn-lg" value="发 送" id="sender">
+
+                            </div>
+
+                            <!--留言列表-->
+
+                            <div th:fragment="commentslist" id="commentslist">
+                                <div class=" container-lg mt-lg-5 border p-lg-2" style="border-top: #17a2b8 solid 2px !important;">
+                                    <div class="p-1 comments">
+                                        <div class="container comment  m-1 p-0" th:each="comment,stat:${comments}">
+                                            <a class="me-a avatar p-0 m-0">
+                                                <img class="w-100 h-100 rounded-circle" th:src="@{${comment.user.avatar}}"
+                                                     src="https://s1.ax1x.com/2020/04/10/GTQcH1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class=" ml-3 border-left ">
+                                                <div class="container ml-2">
+                                                    <a class="author">
+                                                        <span th:text="${comment.userName}">王也</span>
+                                                        <span class="summary-text small"
+                                                              th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm:ss')}">2020-04-10 16:01:27</span>
+
+                                                        <a href="#" onclick="reply(this)"
+                                                           th:attr="data-commentId=${comment.cid},data-nickName=${comment.userName},data-parentCommentId=${comment.parentCommentId!=null ? comment.parentCommentId:comment.cid}"><span
+                                                                class="summary-text small">回复ta</span></a>
+                                                        <a href="javascript:void(0);" onclick="deletecomment(this)"
+                                                           th:attr="data-commentid=${comment.cid}"
+                                                           th:if="${user.id}==${comment.id}"><span
+                                                                class="summary-text small">删除</span></a>
+                                                    </a>
+                                                </div>
+
+                                                <div class="messageText ml-2 container m-2" th:text="${comment.content}">诸葛青，你败过吗？
+                                                </div>
+                                                <!--  评论回复-->
+                                                <div class="p-1 comments m-3">
+                                                    <div class="container comment  m-1 p-0"
+                                                         th:each="reply,replystat: ${comment.replyComments}">
+                                                        <a class="me-a avatar p-0 m-0 ">
+                                                            <img class="w-100 h-100 rounded-circle" th:src="@{${reply.user.avatar}}"
+                                                                 src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586518306370&di=600bf4377f924f0839d54e1c415228da&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201712%2F17%2F20171217170206_MAmwi.png"
+                                                                 alt="">
+                                                        </a>
+                                                        <div class=" ml-3  ">
+                                                            <div class="container ml-2">
+                                                                <a class="author ">
+                                                                    <span th:text="${reply.userName}">冯宝宝</span>
+                                                                    <span class="text-info"
+                                                                          th:text="|@ ${reply.replyToComment.userName}|">@王也 </span>
+                                                                    <span class="summary-text small"
+                                                                          th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm:ss')}">2020-04-10 16:01:27</span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="messageText ml-2 container m-2" th:text="${reply.content}">
+                                                                王也，你被埋过吗？
+                                                            </div>
+                                                            <div class="messageText ml-2 container m-2">
+
+                                                                <a href="#" onclick="reply(this) "
+                                                                   th:attr="data-commentId=${reply.cid},data-nickName=${reply.userName},data-parentCommentId=${reply.parentCommentId!=null ? reply.parentCommentId:reply.cid}"><span
+                                                                        class="summary-text small">回复ta</span></a>
+                                                                <a href="#" onclick="deletecomment(this)"
+                                                                   th:attr="data-commentid=${reply.cid}"
+                                                                   th:if="${user.id}==${reply.id}"><span
+                                                                        class="summary-text small">删除</span></a>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="span5" >
+                                        <ul class="pagination">
+                                            <li class="page-item"><span class="page-link  changepage" onclick="prepage(this)"
+                                                                        th:attr="data-page=${page.current - 1 >1?page.current -1: 1}"
+                                                                        style="color: #17a2b8;cursor:pointer">上一页</span></li>
+
+                                            <li class="page-item"><span class="page-link" onclick="nextpage(this)"
+                                                                        th:attr="data-page=${page.current + 1 > page.pages?page.pages: page.current + 1}"
+                                                                        style="color: #17a2b8;cursor:pointer">下一页</span></li>
+
+
+
+                                        </ul>
+                                    </div>
+                                    <div class="span5" >
+
+
+
+
+                                        <span  th:text="'共'+ ${page.getPages()}+ '页'">共20页</span>
+                                        <span class="text-center ">跳转到</span>
+                                        <input type="text" class="w-25   rounded" name="page" id="page">
+                                        <span class="text-center ">页</span>
+                                        <ul class="pagination">
+                                            <li class="page ml-2 mt-1 w-25 ">
+                                                <a class="btn btn-primary " href="javascript:void(0)" id="pagebtn" onclick="changepage(this)">确定</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+
+                        <script>
+
+                            $(function () {
+
+                                $(".changepage").click(function () {
+                                    var page = $(this).attr('data-page');
+
+                                    // comment/commentlist
+                                    console.log("pages")
+                                    $("#commentslist").load(/*[[@{comment/commentlist}]]*/"comment/commentlist",
+                                        {
+                                            'page': page
+                                        }, function () {
+                                            var page = $("#page").val('');
+                                        })
+                                })
+
+
+                                function clear() {
+
+                                    $("#content").val('');
+                                    $("#parentCommentId").val('-1');
+                                    $('#replyCommentId').val('-1');
+                                    $('#remind').removeAttr('checked');
+                                    $("#content").attr('placeholder', '说点什么。。');
+                                }
+
+                                $(".reply").click(function () {
+                                    alert('addasfasf')
+                                })
+
+                                function checkEmail() {
+                                    var email = $("#email").val();
+                                    var regEmail =  /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+                                    var flag = regEmail.test(email);
+                                    if (flag) {
+                                        $("#errmsg").text("");
+                                    } else {
+
+                                        $("#errmsg").text("email格式错误");
+                                    }
+                                    return flag;
+                                }
+
+
+                                $("#sender").click(function () {
+                                    var content = $("#content").val();
+                                    if (content == null || content.length <= 0) {
+                                        $("#errmsg").text("留言内容不能为空");
+                                        return;
+                                    }
+                                    var email = $("#email").val();
+                                    if (!checkEmail()) {
+                                        return;
+                                    }
+                                    var username = $("#username").val();
+                                    if (username == null || username.length <= 0) {
+                                        $("#errmsg").text("姓名不能为空");
+                                        return;
+                                    }
+
+                                    var parentCommentId = $("#parentCommentId").val();
+                                    var replyCommentId = $("#replyCommentId").val();
+                                    var remind = $("#remind").prop("checked");
+                                    var uid = $("#uid").val();
+
+
+                                    $("#commentslist").load(/*[[@{comment/postcomment}]]*/"comment/postcomment",
+                                        {
+                                            'userName': username,
+                                            'email': email,
+                                            'content': content,
+                                            'parentCommentId': parentCommentId,
+                                            'replyCommentId': replyCommentId,
+                                            'remind': remind,
+                                            'uid': uid
+                                        }, function () {
+                                            clear();
+                                        })
+
+                                })
+                            })
+                        </script>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Grid page -->
+
+
+
+
+<!--底部-->
+<nav th:include="foreground/footer :: footer"  ></nav>
+<!--底部结束-->
+
+
+
+
+<!-- Scripts -->
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/jquery.flexslider.js"></script>
+<script src="js/jquery.flexslider-min.js"></script>
+<script src="js/jquery.elastislide.js"></script>
+<script src="js/jquery.carouFredSel-6.0.4-packed.js"></script>
+<script src="js/jcarousellite_1.0.1.js"></script>
+<script src="js/jquery.zweatherfeed.js"></script>
+<script src="js/jquery.simpleWeather-2.3.min.js"></script>
+<script src="js/jquery.cycle.all.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/jquery.isotope.min.js"></script>
+<script src="js/jquery.tinyscrollbar.min.js"></script>
+<script src="js/foreground/bootstrap.min.js"></script>
+<script>
+    function goToByScroll(id){
+        $ = jQuery;
+        $('html,body').animate({scrollTop: $("#"+id).offset().top},1000);
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.scrollbar1').tinyscrollbar();
+    });
+</script>
+<script src="js/custom.js"></script>
+</body>
+</html>

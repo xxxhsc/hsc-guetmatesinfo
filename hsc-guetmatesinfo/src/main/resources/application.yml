@@ -1,0 +1,33 @@
+debug: true
+logging:
+  level:
+    root: info
+mybatis-plus:
+  configuration:
+    cache-enabled: false
+    map-underscore-to-camel-case: true
+  global-config:
+    db-column-underline: true
+    field-strategy: 2
+    id-type: 2
+    refresh-mapper: true
+  mapper-locations: classpath:com/fcs/*/mapper/xml/*Mapper.xml
+  typeAliasesPackage: com.fcs.*.entity
+server:
+  port: 8999
+spring:
+  datasource:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      cachePrepStmts: true
+      prepStmtCacheSize: 250
+      prepStmtCacheSqlLimit: 2048
+    password: fengcs
+    url: jdbc:mysql://127.0.0.1:3306/skeleton_shiro?characterEncoding=utf8
+    username: root
+  thymeleaf:
+    cache: false
+    content-type: text/html
+    encoding: UTF-8
+    mode: LEGACYHTML5
