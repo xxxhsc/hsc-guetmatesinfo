@@ -1,7 +1,7 @@
 package com.fcs;
 
-import com.fcs.admin.entity.User;
-import com.fcs.admin.service.IUserService;
+import com.fcs.admin.user.entity.User;
+import com.fcs.admin.user.service.IUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * update on 2017/07/13
  */
 @Configuration
-@MapperScan("com.fcs.*.mapper*")
+@MapperScan("com.fcs.*.*.mapper*")
 public class MybatisPlusConfig {
 
     /**

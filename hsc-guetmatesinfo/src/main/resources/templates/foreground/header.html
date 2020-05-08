@@ -1,6 +1,9 @@
 <html  lang="zh" xmlns:th="http://www.thymeleaf.org">
 <!--头部导航栏开始-->
 <nav th:fragment="header" >
+    <link rel="stylesheet" href="css/font-awesome.min93e3.css" >
+
+
     <!-- HEADER IOP -->
     <div class="header-one">
         <div class="headertop-wrapper">
@@ -8,9 +11,7 @@
                 <div class="row">
                     <div th:if="${user}" class="userinfo">
                         <nav  class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                            <div class="navbar-header">
 
-                            </div>
                             <ul class="nav navbar-top-links navbar-right welcome-message">
                                 <li class="dropdown user-menu">
                                     <a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
@@ -26,6 +27,11 @@
                                             <a onclick="resetPwd()">
                                                 <i class="fa fa-key"></i> 修改密码</a>
                                         </li>
+                                        <li th:if="${user.username}">
+                                            <a href="/admin">
+                                                <i class="fa fa-desktop"></i> 后台管理</a>
+                                        </li>
+
                                         <li class="divider"></li>
                                         <li>
                                             <a href="logout">
@@ -59,7 +65,7 @@
                 <div class="span8">
                     <div class="logo">
 
-                        <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+                        <a ><img src="images/logo.png" alt="Logo"></a>
                     </div>
                 </div>
 
@@ -180,9 +186,9 @@
                 <input type="text" value="" name="username" id="username" placeholder="用户名或邮箱" />
                 <input type="text" value="" name="password" id="password" placeholder="密码" />
                 <!--                            <input type="text" value="" id="check" placeholder="验证码" /> <img src="Images">-->
-                <input type="checkbox" name="remarks" checked="checked" id="chkmate" value="0"onclick="CheckStatus(this.value)">
+                <input type="checkbox" name="type" checked="checked" id="chkmate" value="0"onclick="CheckStatus(this.value)">
                 校友
-                <input type="checkbox" name="remarks"  id="chkadmin" value="1" onclick="CheckStatus(this.value)">
+                <input type="checkbox" name="type"  id="chkadmin" value="1" onclick="CheckStatus(this.value)">
                 管理员
                 <br>
                 <br>

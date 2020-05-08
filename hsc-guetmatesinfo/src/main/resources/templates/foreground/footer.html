@@ -105,6 +105,12 @@
             </div>
         </div>
     </div>
+    <script>
+        function goToByScroll(id){
+            $ = jQuery;
+            $('html,body').animate({scrollTop: $("#"+id).offset().top},1000);
+        }
+    </script>
     <!-- Footer -->
 
 

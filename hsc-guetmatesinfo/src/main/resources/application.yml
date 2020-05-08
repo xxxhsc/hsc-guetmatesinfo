@@ -11,8 +11,8 @@ mybatis-plus:
     field-strategy: 2
     id-type: 2
     refresh-mapper: true
-  mapper-locations: classpath:com/fcs/*/mapper/xml/*Mapper.xml
-  typeAliasesPackage: com.fcs.*.entity
+  mapper-locations: classpath:com/fcs/*/*/mapper/xml/*Mapper.xml
+  typeAliasesPackage: com.fcs.*.*.entity
 server:
   port: 8999
 spring:

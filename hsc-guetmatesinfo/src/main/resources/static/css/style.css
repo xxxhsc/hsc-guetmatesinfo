@@ -148,7 +148,7 @@ blockquote p {}
 .clearfix { *zoom: 1; }
 
 a { font: 14px 'gotham_roundedlight',Times New Roman, Times, serif; color: #a0a0a0; }
-span { font: 14px 'gotham_roundedlight',Times New Roman, Times, serif; color: #a0a0a0; }
+span { font: 14px 'gotham_roundedlight',Times New Roman, Times, serif; color: #606060; }
 
 p { font: 14px 'proxima_nova_rgregular',Times New Roman, Times, serif; color: #9d9d9d; line-height: 24px;}
 /****************************************************************************
@@ -225,7 +225,7 @@ p { font: 14px 'proxima_nova_rgregular',Times New Roman, Times, serif; color: #9
 .nav-wrapper nav > ul > li { display: inline-block;  position: relative; }
 .nav-wrapper nav > ul > li.last { background: none; }
 .nav-wrapper nav > ul > li > a { font: 16px  'dinpromedium',Times New Roman, Times, sans-serif;text-transform: uppercase; padding:10px 38px; display: inline-block; serif:0; border-bottom: 2px solid rgba(255, 255, 255, 1); color: rgba(31, 31, 31, 0.54);  }
-.nav-wrapper nav > ul > li > a:hover { border-bottom: 2px solid #017eba;  }
+.nav-wrapper nav > ul > li > a:hover { border-bottom: 2px solid #017eba;  text-decoration: none;}
 
 nav > ul > li ul { background: #ffffff; width: 220px; padding: 25px 0px 0px; display: none; z-index: 999999999999; position: absolute; top: 42px; left: 0px;}
 nav > ul > li ul li { margin-bottom: 30px; display: block; }
@@ -610,7 +610,7 @@ checking_form input {  }
 .grid_btn a.grid:hover, .grid_btn a.grid.active { background: #00689a url("../Images/grid_btn_hover.png") no-repeat center; }
 .grid_btn a.list:hover, .grid_btn a.list.active { background: #00689a url("../Images/list_btn_hover.png") no-repeat center; }
 
-.pagination { margin-bottom: 100px !important; }
+.pagination { margin-bottom: 20px !important; }
 .pagination p { float: left; color: #a0a0a0; font: 14px 'proxima_nova_rgregular', sans-serif; }
 .pagination p a{ color: #ffffff; font: 14px 'proxima_nova_rgregular', sans-serif; }
 
@@ -657,7 +657,7 @@ checking_form input {  }
 .confrm.booking .top h3 { font-size: 30px; }
 .confrm.booking .top h4 span {color: #017eba; font:18px 'gotham_roundedmedium',Times New Roman, Times, serif; }
 
-.booking .bottom {background: #ffffff; padding: 60px 0px 70px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;  }
+.booking .bottom {background: #ffffff; padding: 0px 0px 70px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;  }
 .booking_form p { margin-bottom: 20px; width: 75%; }
 .booking_form { border-right: 1px dashed #d1d1d1; }
 .booking .bottom h2 {font-size: 14px; border-bottom: 1px dashed #d1d1d1; padding-bottom: 5px; margin-bottom: 15px; color: #0f0f0f; text-transform: uppercase;}

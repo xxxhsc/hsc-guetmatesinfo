@@ -1,8 +1,8 @@
 package com.fcs.common;
 
-import com.fcs.admin.entity.Role;
-import com.fcs.admin.entity.User;
-import com.fcs.admin.service.IUserService;
+import com.fcs.admin.role.entity.Role;
+import com.fcs.admin.user.entity.User;
+import com.fcs.admin.user.service.IUserService;
 import com.fcs.common.shiro.AuthSubjectUtil;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -17,7 +17,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
+ * <p>
  *
+ * </p>
+ *
+ * @author hsc
+ * @since 2020-04-12
  */
 public class ShiroRealm extends AuthorizingRealm {
 
@@ -38,14 +43,17 @@ public class ShiroRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         logger.info("验证当前Subject时获取到token为：" + ReflectionToStringBuilder.toString(token, ToStringStyle.MULTI_LINE_STYLE));
         //查出是否有此用户
+
         User hasUser = userService.findByName(token.getUsername());
         if (hasUser != null) {
             // 若存在，将此用户存放到登录认证info中，无需自己做密码对比，Shiro会为我们进行密码对比校验
             // @link org.apache.shiro.realm.AuthenticatingRealm#assertCredentialsMatch
             logger.info("用户已经存在");
+            /*查找用户id对应的角色权限*/
             List<Role> list = userService.findRolePermissions(hasUser.getId());
             hasUser.setRoleList(list);
             SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(hasUser, hasUser.getPassword(), getName());
+
             // @link HashedCredentialsMatcher#doCredentialsMatch
 //            info.setCredentialsSalt(ByteSource.Util.bytes(AuthConstant.salt));
             return info;

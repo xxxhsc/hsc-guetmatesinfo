@@ -1,7 +1,6 @@
 .navbar a {
     /*height:80px !important;*/
     /*font-size: large;*/
-    color: white !important;
 
     /*background-color: white !important;*/
 
@@ -11,7 +10,9 @@
 :hover {
     color: #849199;
 }
-
+.booking li span{
+    width: auto!important;
+}
 .summary-text {
     font-weight: 300 !important;
     letter-spacing: 1px !important;

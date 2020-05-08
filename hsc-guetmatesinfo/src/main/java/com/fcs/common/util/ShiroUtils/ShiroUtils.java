@@ -1,6 +1,6 @@
 package com.fcs.common.util.ShiroUtils;
 
-import com.fcs.admin.entity.User;
+import com.fcs.admin.user.entity.User;
 import com.fcs.common.util.StringUtils;
 import com.fcs.common.util.bean.BeanUtils;
 import org.apache.shiro.SecurityUtils;

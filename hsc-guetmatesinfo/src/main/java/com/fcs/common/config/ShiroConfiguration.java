@@ -16,6 +16,8 @@ import org.springframework.context.annotation.DependsOn;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+
+
 /**
  * Created by Lucare.Feng on 2017/3/6.
  */
@@ -88,11 +90,12 @@ public class ShiroConfiguration {
         filterChainDefinitionManager.put("/**.html", "authc");
         filterChainDefinitionManager.put("/index", "authc");
         filterChainDefinitionManager.put("/profile", "authc");
+        filterChainDefinitionManager.put("/note", "authc");
 //        filterChainDefinitionManager.put("/logout", "logout");
 //        filterChainDefinitionManager.put("/user/**", "authc,roles[user]");
 //        filterChainDefinitionManager.put("/shop/**", "authc,roles[shop]");
-//        filterChainDefinitionManager.put("/admin/**", "authc,roles[admin]");
-        filterChainDefinitionManager.put("/admin/**", "authc");
+        filterChainDefinitionManager.put("/admin/**", "authc,roles[guetmates,admin]");
+//        filterChainDefinitionManager.put("/admin/**", "authc");
 //未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);

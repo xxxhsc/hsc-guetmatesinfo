@@ -326,19 +326,7 @@ jQuery(document).ready(function() {
         }
     });
 	
-	$.simpleWeather({
-		zipcode: '76309',
-		unit: 'c',
-		success: function(weather) {
-			html = '<h2>'+weather.city+', '+weather.region+'</h2>';
-			html += '<figure style="background-image: url('+weather.image+');"></figure>';
-			html += '<p>'+weather.temp+'&deg; '+weather.units.temp+'</p>';
-			$("#weather").html(html);
-		},
-		error: function(error) {
-			$("#weather").html('<p>'+error+'</p>');
-		}
-	});
+
 	
 	
 

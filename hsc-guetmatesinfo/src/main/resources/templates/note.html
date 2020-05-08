@@ -19,11 +19,138 @@
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
+    <link rel="stylesheet" href="css/note/bootstrap.css">
+    <link rel="stylesheet" href="css/note/mycss.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/flexslider.css">
+    <script>
 
 
+        function reply(obj) {
+
+            // th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}"
+
+            // alert(obj)
+            var commentId = $(obj).data('commentid');
+            var parentCommentId = $(obj).data('parentcommentid');
+            var nickName = $(obj).data('nickname');
+            // alert(commentId)
+            $("#parentCommentId").val(parentCommentId);
+            $("#replyCommentId").val(commentId);
+
+            $ = jQuery;
+            var top1 = $("#contenttop").offset().top;
+
+            $("#content").attr("placeholder", "@" + nickName).focus();
+            $(window).scrollTo(top1, 500);
+
+        }
+
+        function deletecomment(obj) {
+
+            var cid = $(obj).data('commentid');
+            $("#commentslist").load(/*[[@{comment/delete}]]*/"comment/delete",
+                {
+                    'cid': cid
+                })
+        }
+
+
+        function nextpage(obj) {
+            var page = $(obj).data('page');
+            $("#commentslist").load(/*[[@{comment/commentlist}]]*/"comment/commentlist",
+                {
+                    'page': page
+                })
+
+        }
+
+        function prepage(obj) {
+            var page = $(obj).data('page');
+            $("#commentslist").load(/*[[@{comment/commentlist}]]*/"comment/commentlist",
+                {
+                    'page': page
+                })
+        }
+        function changepage(obj) {
+            var page = $("#page").val();
+            $("#commentslist").load(/*[[@{comment/commentlist}]]*/"comment/commentlist",
+                {
+                    'page': page
+                })
+        }
+
+        $(function () {
+            $.get("nest.html", function (data) {
+                $("#nest").html(data);
+            });
+
+
+            $("#commentslist").load(/*[[@{comment/commentlist}]]*/"comment/commentlist",)
+
+        });
+    </script>
+
+
+    <script>
+
+        $(function () {
+
+            $(".changepage").click(function () {
+                var page = $(this).attr('data-page');
+
+                // comment/commentlist
+                console.log("pages")
+                $("#commentslist").load("comment/commentlist",
+                    {
+                        'page': page
+                    }, function () {
+                        var page = $("#page").val('');
+                    })
+            })
+
+
+            function clear() {
+
+                $("#content").val('');
+                $("#parentCommentId").val('-1');
+                $('#replyCommentId').val('-1');
+                $("#content").attr('placeholder', '说点什么。。');
+            }
+
+            // $('.reply').click(function () {
+            //    alert('addasfasf')
+            // })
+
+
+            $("#sender").click(function () {
+                alert("点击了发送");
+                var content = $("#content").val();
+                if (content == null || content.length <= 0) {
+                    $("#errmsg").text("留言内容不能为空");
+                    return;
+                }
+                var username =$("#username").val();
+                var parentCommentId = $("#parentCommentId").val();
+                var replyCommentId = $("#replyCommentId").val();
+                var uid = $("#uid").val();
+
+
+                $("#commentslist").load("comment/postcomment",
+                    {
+                        'userName': username,
+                        'content': content,
+                        'parentCommentId': parentCommentId,
+                        'replyCommentId': replyCommentId,
+                        'uid': uid
+                    }, function () {
+                        clear();
+                    })
+
+            })
+        })
+    </script>
 
 
     <!--[if lt IE 9]>
@@ -68,7 +195,7 @@
 
                 </div>
                 <div class="bottom clearfix">
-                    <div >
+                    <div id="contenttop">
 
                         <!--留言列表-->
 
@@ -79,43 +206,49 @@
                             <input type="hidden" name="parentCommentId" value="-1" id="parentCommentId">
                             <input type="hidden" name="replyCommentId" value="-1" id="replyCommentId">
                             <input type="hidden" name="uid" th:value="${user.id}" id="uid">
+                            <input type="hidden" name="username" th:value="${user.sname}" id="username">
                             <!--            输入框-->
                             <div id="noteEdit">
-                                <textarea name="content" id="content" placeholder="说点什么。。。"></textarea>
+                                <textarea name="content" id="content" placeholder="说点什么。。。" style="height: 200px;width:100%;"></textarea>
                             </div>
 
                             <!--提交列表-->
-                            <div class="container-fluid m-0 mt-3 p-0 h-100">
+                            <div class="m-3">
 
 
                                 <input class="btn btn-primary btn-lg" value="发 送" id="sender">
 
                             </div>
+                            <div class=" mb-1 p-0  inline small text-danger   text-center">
+                                <div class="container  text-center pt-1" id="errmsg">
 
+                                </div>
+                            </div>
                             <!--留言列表-->
 
                             <div th:fragment="commentslist" id="commentslist">
-                                <div class=" container-lg mt-lg-5 border p-lg-2" style="border-top: #17a2b8 solid 2px !important;">
-                                    <div class="p-1 comments">
+                                <div  style="border-top: #17a2b8 solid 2px !important;">
+                                    <div class="p-1 comments border-left border-right border-bottom">
                                         <div class="container comment  m-1 p-0" th:each="comment,stat:${comments}">
                                             <a class="me-a avatar p-0 m-0">
-                                                <img class="w-100 h-100 rounded-circle" th:src="@{${comment.user.avatar}}"
+                                                <img class="img-circle" style="width:30px;height:30px"
                                                      src="https://s1.ax1x.com/2020/04/10/GTQcH1.png"
                                                      alt="">
                                             </a>
-                                            <div class=" ml-3 border-left ">
+                                            <div class=" ml-3  ">
                                                 <div class="container ml-2">
                                                     <a class="author">
                                                         <span th:text="${comment.userName}">王也</span>
                                                         <span class="summary-text small"
                                                               th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm:ss')}">2020-04-10 16:01:27</span>
 
-                                                        <a href="#" onclick="reply(this)"
+                                                        <a  href="javascript:void(0);"onclick="reply(this)"
                                                            th:attr="data-commentId=${comment.cid},data-nickName=${comment.userName},data-parentCommentId=${comment.parentCommentId!=null ? comment.parentCommentId:comment.cid}"><span
-                                                                class="summary-text small">回复ta</span></a>
+                                                                class="text-info summary-text small">回复</span></a>
                                                         <a href="javascript:void(0);" onclick="deletecomment(this)"
                                                            th:attr="data-commentid=${comment.cid}"
-                                                           th:if="${user.id}==${comment.id}"><span
+                                                           th:if="${user.id}==${comment.uid}">
+                                                            <span
                                                                 class="summary-text small">删除</span></a>
                                                     </a>
                                                 </div>
@@ -123,35 +256,36 @@
                                                 <div class="messageText ml-2 container m-2" th:text="${comment.content}">诸葛青，你败过吗？
                                                 </div>
                                                 <!--  评论回复-->
-                                                <div class="p-1 comments m-3">
+                                                <div class="p-1 comments m-3 border-left " th:if="${comment.replyComments.size()!=0}">
                                                     <div class="container comment  m-1 p-0"
                                                          th:each="reply,replystat: ${comment.replyComments}">
                                                         <a class="me-a avatar p-0 m-0 ">
-                                                            <img class="w-100 h-100 rounded-circle" th:src="@{${reply.user.avatar}}"
+                                                            <img style="width:30px;height:30px" class="img-circle "
                                                                  src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586518306370&di=600bf4377f924f0839d54e1c415228da&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201712%2F17%2F20171217170206_MAmwi.png"
                                                                  alt="">
                                                         </a>
-                                                        <div class=" ml-3  ">
+                                                        <div class=" ml-3   ">
                                                             <div class="container ml-2">
+
                                                                 <a class="author ">
                                                                     <span th:text="${reply.userName}">冯宝宝</span>
-                                                                    <span class="text-info"
-                                                                          th:text="|@ ${reply.replyToComment.userName}|">@王也 </span>
+
                                                                     <span class="summary-text small"
                                                                           th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm:ss')}">2020-04-10 16:01:27</span>
+                                                                    <a href="javascript:void(0);" onclick="reply(this) "
+                                                                       th:attr="data-commentId=${reply.cid},data-nickName=${reply.userName},data-parentCommentId=${reply.parentCommentId!=null ? reply.parentCommentId:reply.cid}"><span
+                                                                            class="text-info summary-text small">回复</span></a>
                                                                 </a>
                                                             </div>
                                                             <div class="messageText ml-2 container m-2" th:text="${reply.content}">
-                                                                王也，你被埋过吗？
+                                                                -
                                                             </div>
                                                             <div class="messageText ml-2 container m-2">
 
-                                                                <a href="#" onclick="reply(this) "
-                                                                   th:attr="data-commentId=${reply.cid},data-nickName=${reply.userName},data-parentCommentId=${reply.parentCommentId!=null ? reply.parentCommentId:reply.cid}"><span
-                                                                        class="summary-text small">回复ta</span></a>
+
                                                                 <a href="#" onclick="deletecomment(this)"
                                                                    th:attr="data-commentid=${reply.cid}"
-                                                                   th:if="${user.id}==${reply.id}"><span
+                                                                   th:if="${user.id}==${reply.uid}"><span
                                                                         class="summary-text small">删除</span></a>
 
                                                             </div>
@@ -166,35 +300,23 @@
 
                                     </div>
 
-                                    <div class="span5" >
-                                        <ul class="pagination">
-                                            <li class="page-item"><span class="page-link  changepage" onclick="prepage(this)"
-                                                                        th:attr="data-page=${page.current - 1 >1?page.current -1: 1}"
-                                                                        style="color: #17a2b8;cursor:pointer">上一页</span></li>
+                                    <div class="container-lg">
+                                        <nav aria-label="Page navigation" class="mt-3 ">
+                                            <ul class="pagination">
+                                                <li class="page-item"><span class="page-link  changepage" onclick="prepage(this)" style="color: #17a2b8;cursor:pointer" data-page="1">上一页</span></li>
+                                                <li class="page-item"><a class="page-link changepage" href="javascript:void(0)" style="color: #17a2b8">当前在第<span>1</span>页</a></li>
+                                                <li class="page-item"><span class="page-link" onclick="nextpage(this)" style="color: #17a2b8;cursor:pointer" data-page="1">下一页</span></li>
+                                                <li class="page-item text-center  mt-2 ml-2"></li>
+                                                <li class="page ml-2 mt-1 w-25 ">
+                                                    <span class="text-center ">共1页</span>
+                                                    <span class="text-center ">跳转到</span>
+                                                    <input type="text" class="w-25   rounded" name="page" id="page">
+                                                    <span class="text-center ">页</span>
+                                                    <a class="btn btn-primary " href="javascript:void(0)" id="pagebtn" onclick="changepage(this)">确定</a>
+                                                </li>
 
-                                            <li class="page-item"><span class="page-link" onclick="nextpage(this)"
-                                                                        th:attr="data-page=${page.current + 1 > page.pages?page.pages: page.current + 1}"
-                                                                        style="color: #17a2b8;cursor:pointer">下一页</span></li>
-
-
-
-                                        </ul>
-                                    </div>
-                                    <div class="span5" >
-
-
-
-
-                                        <span  th:text="'共'+ ${page.getPages()}+ '页'">共20页</span>
-                                        <span class="text-center ">跳转到</span>
-                                        <input type="text" class="w-25   rounded" name="page" id="page">
-                                        <span class="text-center ">页</span>
-                                        <ul class="pagination">
-                                            <li class="page ml-2 mt-1 w-25 ">
-                                                <a class="btn btn-primary " href="javascript:void(0)" id="pagebtn" onclick="changepage(this)">确定</a>
-                                            </li>
-
-                                        </ul>
+                                            </ul>
+                                        </nav>
                                     </div>
 
 
@@ -206,89 +328,7 @@
                             </div>
                         </div>
 
-                        <script>
 
-                            $(function () {
-
-                                $(".changepage").click(function () {
-                                    var page = $(this).attr('data-page');
-
-                                    // comment/commentlist
-                                    console.log("pages")
-                                    $("#commentslist").load(/*[[@{comment/commentlist}]]*/"comment/commentlist",
-                                        {
-                                            'page': page
-                                        }, function () {
-                                            var page = $("#page").val('');
-                                        })
-                                })
-
-
-                                function clear() {
-
-                                    $("#content").val('');
-                                    $("#parentCommentId").val('-1');
-                                    $('#replyCommentId').val('-1');
-                                    $('#remind').removeAttr('checked');
-                                    $("#content").attr('placeholder', '说点什么。。');
-                                }
-
-                                $(".reply").click(function () {
-                                    alert('addasfasf')
-                                })
-
-                                function checkEmail() {
-                                    var email = $("#email").val();
-                                    var regEmail =  /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
-                                    var flag = regEmail.test(email);
-                                    if (flag) {
-                                        $("#errmsg").text("");
-                                    } else {
-
-                                        $("#errmsg").text("email格式错误");
-                                    }
-                                    return flag;
-                                }
-
-
-                                $("#sender").click(function () {
-                                    var content = $("#content").val();
-                                    if (content == null || content.length <= 0) {
-                                        $("#errmsg").text("留言内容不能为空");
-                                        return;
-                                    }
-                                    var email = $("#email").val();
-                                    if (!checkEmail()) {
-                                        return;
-                                    }
-                                    var username = $("#username").val();
-                                    if (username == null || username.length <= 0) {
-                                        $("#errmsg").text("姓名不能为空");
-                                        return;
-                                    }
-
-                                    var parentCommentId = $("#parentCommentId").val();
-                                    var replyCommentId = $("#replyCommentId").val();
-                                    var remind = $("#remind").prop("checked");
-                                    var uid = $("#uid").val();
-
-
-                                    $("#commentslist").load(/*[[@{comment/postcomment}]]*/"comment/postcomment",
-                                        {
-                                            'userName': username,
-                                            'email': email,
-                                            'content': content,
-                                            'parentCommentId': parentCommentId,
-                                            'replyCommentId': replyCommentId,
-                                            'remind': remind,
-                                            'uid': uid
-                                        }, function () {
-                                            clear();
-                                        })
-
-                                })
-                            })
-                        </script>
 
                     </div>
                 </div>
@@ -317,19 +357,11 @@
 <script src="js/jquery.elastislide.js"></script>
 <script src="js/jquery.carouFredSel-6.0.4-packed.js"></script>
 <script src="js/jcarousellite_1.0.1.js"></script>
-<script src="js/jquery.zweatherfeed.js"></script>
-<script src="js/jquery.simpleWeather-2.3.min.js"></script>
 <script src="js/jquery.cycle.all.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/jquery.isotope.min.js"></script>
 <script src="js/jquery.tinyscrollbar.min.js"></script>
 <script src="js/foreground/bootstrap.min.js"></script>
-<script>
-    function goToByScroll(id){
-        $ = jQuery;
-        $('html,body').animate({scrollTop: $("#"+id).offset().top},1000);
-    }
-</script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('.scrollbar1').tinyscrollbar();

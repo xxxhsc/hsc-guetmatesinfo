@@ -259,7 +259,7 @@ a {
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 940px;
+  width: 940px!important;
 }
 .span12 {
   width: 940px;
@@ -3369,7 +3369,7 @@ input[type="submit"].btn.btn-mini {
   clear: both;
 }
 .navbar .container {
-  width: auto;
+  width: auto!important;
 }
 .nav-collapse.collapse {
   height: auto;
@@ -3505,7 +3505,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 940px;
+  width: 940px!important;
 }
 .navbar-fixed-top {
   top: 0;
@@ -5055,7 +5055,7 @@ button.close {
     margin-left: 0;
   }
   .container {
-    width: auto;
+    width: auto!important;
   }
   .row-fluid {
     width: 100%;
@@ -5202,7 +5202,7 @@ button.close {
   .navbar-static-top .container,
   .navbar-fixed-top .container,
   .navbar-fixed-bottom .container {
-    width: 724px;
+    width: 724px!important;
   }
   .span12 {
     width: 724px;
@@ -5518,7 +5518,7 @@ button.close {
   .navbar-static-top .container,
   .navbar-fixed-top .container,
   .navbar-fixed-bottom .container {
-    width: 1170px;
+    width: 1170px!important;
   }
   .span12 {
     width: 1170px;
@@ -5839,7 +5839,7 @@ button.close {
     padding: 5px;
   }
   .navbar .container {
-    width: auto;
+    width: auto!important;
     padding: 0;
   }
   .navbar .brand {
