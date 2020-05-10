@@ -1,4 +1,4 @@
-package com.fcs.admin.user.controller;
+package com.fcs.foreground.comment.web;
 
 
 import com.fcs.admin.user.entity.User;
@@ -29,8 +29,6 @@ public class IndexController {
     @RequestMapping("/index")
     public String list(){
         System.out.println("this is index");
-
-
         return "adminindex";
     }
 
@@ -44,6 +42,29 @@ public class IndexController {
 
         model.addAttribute("user", ShiroUtils.getuserinfo());
         return "xyhd";
+    }
+
+    @RequestMapping("/profile")
+    public String profile(Model model) {
+        System.out.println("个人资料");
+        model.addAttribute("user",ShiroUtils.getuserinfo());
+        return "profile";
+    }
+    @RequestMapping("/")
+    public String foregroundindex(Model model) {
+        System.out.println("首页");
+        model.addAttribute("user",ShiroUtils.getuserinfo());
+
+        System.out.println("首页用户信息"+ShiroUtils.getuserinfo());
+        return "index";
+    }
+
+
+    @RequestMapping("/details")
+    public String details(Model model){
+        System.out.println("详情页");
+
+        return "details";
     }
 
 }

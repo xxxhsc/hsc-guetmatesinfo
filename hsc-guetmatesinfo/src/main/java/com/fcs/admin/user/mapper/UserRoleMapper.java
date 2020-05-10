@@ -1,6 +1,7 @@
 package com.fcs.admin.user.mapper;
 
 import com.fcs.admin.role.entity.Role;
+import com.fcs.admin.user.entity.User;
 import com.fcs.admin.user.entity.UserRole;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
@@ -20,4 +21,5 @@ public interface UserRoleMapper extends BaseMapper<UserRole> {
 
     List<Role> findRoleListByUserId(long uid);
 
+    List<UserRole> findRoleidListByUserId(long uid);
 }

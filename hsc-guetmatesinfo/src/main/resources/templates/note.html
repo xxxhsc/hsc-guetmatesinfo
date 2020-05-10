@@ -24,133 +24,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/flexslider.css">
-    <script>
 
-
-        function reply(obj) {
-
-            // th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}"
-
-            // alert(obj)
-            var commentId = $(obj).data('commentid');
-            var parentCommentId = $(obj).data('parentcommentid');
-            var nickName = $(obj).data('nickname');
-            // alert(commentId)
-            $("#parentCommentId").val(parentCommentId);
-            $("#replyCommentId").val(commentId);
-
-            $ = jQuery;
-            var top1 = $("#contenttop").offset().top;
-
-            $("#content").attr("placeholder", "@" + nickName).focus();
-            $(window).scrollTo(top1, 500);
-
-        }
-
-        function deletecomment(obj) {
-
-            var cid = $(obj).data('commentid');
-            $("#commentslist").load(/*[[@{comment/delete}]]*/"comment/delete",
-                {
-                    'cid': cid
-                })
-        }
-
-
-        function nextpage(obj) {
-            var page = $(obj).data('page');
-            $("#commentslist").load(/*[[@{comment/commentlist}]]*/"comment/commentlist",
-                {
-                    'page': page
-                })
-
-        }
-
-        function prepage(obj) {
-            var page = $(obj).data('page');
-            $("#commentslist").load(/*[[@{comment/commentlist}]]*/"comment/commentlist",
-                {
-                    'page': page
-                })
-        }
-        function changepage(obj) {
-            var page = $("#page").val();
-            $("#commentslist").load(/*[[@{comment/commentlist}]]*/"comment/commentlist",
-                {
-                    'page': page
-                })
-        }
-
-        $(function () {
-            $.get("nest.html", function (data) {
-                $("#nest").html(data);
-            });
-
-
-            $("#commentslist").load(/*[[@{comment/commentlist}]]*/"comment/commentlist",)
-
-        });
-    </script>
-
-
-    <script>
-
-        $(function () {
-
-            $(".changepage").click(function () {
-                var page = $(this).attr('data-page');
-
-                // comment/commentlist
-                console.log("pages")
-                $("#commentslist").load("comment/commentlist",
-                    {
-                        'page': page
-                    }, function () {
-                        var page = $("#page").val('');
-                    })
-            })
-
-
-            function clear() {
-
-                $("#content").val('');
-                $("#parentCommentId").val('-1');
-                $('#replyCommentId').val('-1');
-                $("#content").attr('placeholder', '说点什么。。');
-            }
-
-            // $('.reply').click(function () {
-            //    alert('addasfasf')
-            // })
-
-
-            $("#sender").click(function () {
-                alert("点击了发送");
-                var content = $("#content").val();
-                if (content == null || content.length <= 0) {
-                    $("#errmsg").text("留言内容不能为空");
-                    return;
-                }
-                var username =$("#username").val();
-                var parentCommentId = $("#parentCommentId").val();
-                var replyCommentId = $("#replyCommentId").val();
-                var uid = $("#uid").val();
-
-
-                $("#commentslist").load("comment/postcomment",
-                    {
-                        'userName': username,
-                        'content': content,
-                        'parentCommentId': parentCommentId,
-                        'replyCommentId': replyCommentId,
-                        'uid': uid
-                    }, function () {
-                        clear();
-                    })
-
-            })
-        })
-    </script>
 
 
     <!--[if lt IE 9]>
@@ -206,24 +80,25 @@
                             <input type="hidden" name="parentCommentId" value="-1" id="parentCommentId">
                             <input type="hidden" name="replyCommentId" value="-1" id="replyCommentId">
                             <input type="hidden" name="uid" th:value="${user.id}" id="uid">
-                            <input type="hidden" name="username" th:value="${user.sname}" id="username">
+                            <input type="hidden" name="userName" th:value="${user.sname}" id="userName">
                             <!--            输入框-->
                             <div id="noteEdit">
                                 <textarea name="content" id="content" placeholder="说点什么。。。" style="height: 200px;width:100%;"></textarea>
                             </div>
 
                             <!--提交列表-->
+
                             <div class="m-3">
 
 
-                                <input class="btn btn-primary btn-lg" value="发 送" id="sender">
+
+                                    <a class="btn btn-primary " href="javascript:void(0)" id="sendcomment" onclick="sendcomment(this)">确定</a>
+
+                                <a  style="color: red"  class="author" id="errmsg">             </a>
+
 
                             </div>
-                            <div class=" mb-1 p-0  inline small text-danger   text-center">
-                                <div class="container  text-center pt-1" id="errmsg">
 
-                                </div>
-                            </div>
                             <!--留言列表-->
 
                             <div th:fragment="commentslist" id="commentslist">
@@ -232,8 +107,8 @@
                                         <div class="container comment  m-1 p-0" th:each="comment,stat:${comments}">
                                             <a class="me-a avatar p-0 m-0">
                                                 <img class="img-circle" style="width:30px;height:30px"
-                                                     src="https://s1.ax1x.com/2020/04/10/GTQcH1.png"
-                                                     alt="">
+                                                     src="http://q9ufzpdqm.bkt.clouddn.com/profile.jpg"
+                                                     alt=""  th:src="@{${comment.user.avatar}}">
                                             </a>
                                             <div class=" ml-3  ">
                                                 <div class="container ml-2">
@@ -260,8 +135,7 @@
                                                     <div class="container comment  m-1 p-0"
                                                          th:each="reply,replystat: ${comment.replyComments}">
                                                         <a class="me-a avatar p-0 m-0 ">
-                                                            <img style="width:30px;height:30px" class="img-circle "
-                                                                 src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586518306370&di=600bf4377f924f0839d54e1c415228da&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201712%2F17%2F20171217170206_MAmwi.png"
+                                                            <img style="width:30px;height:30px" class="img-circle " th:src="@{${reply.user.avatar}}" src="http://q9ufzpdqm.bkt.clouddn.com/1 (17).jpg"
                                                                  alt="">
                                                         </a>
                                                         <div class=" ml-3   ">
@@ -366,7 +240,126 @@
     $(document).ready(function(){
         $('.scrollbar1').tinyscrollbar();
     });
+    function sendcomment(obj ){
+        var content = $("#content").val();
+        if (content == null || content.length <= 0) {
+            $("#errmsg").text("留言内容不能为空");
+            return;
+        }
+
+        var parentCommentId = $("#parentCommentId").val();
+        var replyCommentId = $("#replyCommentId").val();
+        var uid = $("#uid").val();
+        var username =$("#userName").val();
+
+        $("#commentslist").load("comment/postcomment",
+            {
+                'userName': username,
+                'content': content,
+                'parentCommentId': parentCommentId,
+                'replyCommentId': replyCommentId,
+                'uid': uid
+            }, function () {
+                clear();
+            })
+    }
+
+    function reply(obj) {
+
+        // th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}"
+
+        // alert(obj)
+        var commentId = $(obj).data('commentid');
+        var parentCommentId = $(obj).data('parentcommentid');
+        var nickName = $(obj).data('nickname');
+        // alert(commentId)
+        $("#parentCommentId").val(parentCommentId);
+        $("#replyCommentId").val(commentId);
+
+        $ = jQuery;
+        var top1 = $("#contenttop").offset().top;
+
+        $("#content").attr("placeholder", "@" + nickName).focus();
+        $(window).scrollTo(top1, 500);
+
+    }
+
+    function deletecomment(obj) {
+
+        var cid = $(obj).data('commentid');
+        $("#commentslist").load("comment/delete",
+            {
+                'cid': cid
+            })
+    }
+
+
+    function nextpage(obj) {
+        var page = $(obj).data('page');
+        $("#commentslist").load(/*[[@{comment/commentlist}]]*/"comment/commentlist",
+            {
+                'page': page
+            })
+
+    }
+
+    function prepage(obj) {
+        var page = $(obj).data('page');
+        $("#commentslist").load(/*[[@{comment/commentlist}]]*/"comment/commentlist",
+            {
+                'page': page
+            })
+    }
+    function changepage(obj) {
+        var page = $("#page").val();
+        $("#commentslist").load(/*[[@{comment/commentlist}]]*/"comment/commentlist",
+            {
+                'page': page
+            })
+    }
+
+    $(function () {
+        $.get("nest.html", function (data) {
+            $("#nest").html(data);
+        });
+
+
+        $("#commentslist").load(/*[[@{comment/commentlist}]]*/"comment/commentlist",)
+
+    });
+
+
+    $(function () {
+
+        $(".changepage").click(function () {
+            var page = $(this).attr('data-page');
+            console.log("pages")
+            $("#commentslist").load("comment/commentlist",
+                {
+                    'page': page
+                }, function () {
+                    var page = $("#page").val('');
+                })
+        })
+
+
+        function clear() {
+
+            $("#content").val('');
+            $("#parentCommentId").val('-1');
+            $('#replyCommentId').val('-1');
+            $("#content").attr('placeholder', '说点什么。。');
+        }
+
+        // $('.reply').click(function () {
+        //    alert('addasfasf')
+        // })
+
+
+    })
+
 </script>
 <script src="js/custom.js"></script>
+<script src="js/note/note.js"></script>
 </body>
 </html>

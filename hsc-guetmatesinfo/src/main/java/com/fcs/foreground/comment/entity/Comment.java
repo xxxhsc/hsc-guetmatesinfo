@@ -43,7 +43,6 @@ public class Comment implements Serializable {
     @TableField("replyCommentId")
     private Integer replyCommentId;
 
-    private String email;
 
     @TableField("userName")
     private String userName;

@@ -85,12 +85,14 @@ public class ShiroConfiguration {
         filterChainDefinitionManager.put("/login", "anon");
         filterChainDefinitionManager.put("/xyhd", "anon");
         filterChainDefinitionManager.put("/register","anon");
+        filterChainDefinitionManager.put(" /details","anon");
         // 退出 logout地址，shiro去清除session
         filterChainDefinitionManager.put("/logout", "logout");
         filterChainDefinitionManager.put("/**.html", "authc");
         filterChainDefinitionManager.put("/index", "authc");
         filterChainDefinitionManager.put("/profile", "authc");
         filterChainDefinitionManager.put("/note", "authc");
+
 //        filterChainDefinitionManager.put("/logout", "logout");
 //        filterChainDefinitionManager.put("/user/**", "authc,roles[user]");
 //        filterChainDefinitionManager.put("/shop/**", "authc,roles[shop]");

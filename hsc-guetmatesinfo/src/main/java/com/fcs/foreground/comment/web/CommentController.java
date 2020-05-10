@@ -31,8 +31,13 @@ public class CommentController {
 
     @RequestMapping("/comment/postcomment")
     public String postcomment(Comment comment) {
-        System.out.println(comment);
-        commentService.saveComment(comment);
+        System.out.println("后台收到1comment数据"+comment);
+        if(commentService.saveComment(comment)){
+            System.out.println("发送失败"+comment);
+        }else {
+            System.out.println("发送成功"+comment);
+        }
+
         return "redirect:/comment/commentlist";
     }
 
@@ -59,7 +64,7 @@ public class CommentController {
     @RequestMapping("/note")
     public String getcomment(Model model){
 
-        System.out.println("this is note");
+
         Page<Comment> commentIPage = commentService.commentPage(new Page<Comment> (1,5));
         List<Comment> comments = commentIPage.getRecords();
         System.out.println("page "+commentIPage);

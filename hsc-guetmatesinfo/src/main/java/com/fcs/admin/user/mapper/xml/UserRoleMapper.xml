@@ -12,5 +12,7 @@
 	<select id="findRoleListByUserId" resultType="com.fcs.admin.role.entity.Role" parameterType="java.lang.Long">
 		SELECT role.id,role.name from t_user_role urole left join t_role role on urole.roleid = role.id where userid = #{uid}
 	</select>
-
+	<select id="findRoleidListByUserId" resultType="com.fcs.admin.user.entity.UserRole" parameterType="java.lang.Long">
+		SELECT userid,roleid from t_user_role  where userid = #{userid}
+	</select>
 </mapper>

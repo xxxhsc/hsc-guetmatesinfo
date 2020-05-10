@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.fcs.admin.role.entity.Role;
 import com.fcs.admin.user.entity.User;
 import com.baomidou.mybatisplus.service.IService;
+import com.fcs.admin.user.entity.UserRole;
 
 import java.util.List;
 
@@ -33,5 +34,12 @@ public interface IUserService extends IService<User> {
     List<Role> findRolePermissions(long uid);
 
     Page<User> selectUserPage(Page<User> page);
+
+    /**
+     * 查找用户的角色列表
+     * @param uid
+     * @return
+     */
+    List<UserRole> findRole(long uid);
 
 }

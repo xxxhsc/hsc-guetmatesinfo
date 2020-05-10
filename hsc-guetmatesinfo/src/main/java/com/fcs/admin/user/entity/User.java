@@ -39,7 +39,6 @@ public class User extends Model<User> {
 	private String semail;
 	private String scollege;
 	private String avatar;
-
 	@TableField(exist = false)
 	private List<Role> roleList;
 
