@@ -16,6 +16,37 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="ibox float-e-margins">
+
+        <div class="ibox-content">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <!-- Example Toolbar -->
+                    <div class="example-wrap">
+                        <div class="example">
+                            <div class="btn-group hidden-xs" id="exampleSearchbar" role="group">
+                                <button data-toggle="modal" class="btn btn-outline btn-default" href="#modal-add-form" >
+                                    <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                                </button>
+                                <!--<button type="button" class="btn btn-outline btn-default">-->
+                                <!--<i class="glyphicon glyphicon-heart" aria-hidden="true"></i>-->
+                                <!--</button>-->
+                                <button type="button" class="btn btn-outline btn-default">
+                                    <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Example Toolbar -->
+                </div>
+                <div class="col-sm-12">
+                    <div class="example">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h5>用户管理</h5>
             <div class="ibox-tools">
@@ -46,9 +77,9 @@
                                 <button data-toggle="modal" class="btn btn-outline btn-default" href="#modal-add-form" >
                                     <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
                                 </button>
-                                <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
-                                </button>
+                                <!--<button type="button" class="btn btn-outline btn-default">-->
+                                    <!--<i class="glyphicon glyphicon-heart" aria-hidden="true"></i>-->
+                                <!--</button>-->
                                 <button type="button" class="btn btn-outline btn-default">
                                     <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
                                 </button>
@@ -59,7 +90,7 @@
                 </div>
                 <div class="col-sm-12">
                     <div class="example">
-                        <table id="userTable" data-toggle="table" data-url="/admin/user/list" data-height="650" data-response-handler="handlerData"
+                        <table id="adminTable" data-toggle="table" data-url="/admin/user/list" data-height="650" data-response-handler="handlerData"
                                data-pagination="true" data-mobile-responsive="true" cache="false">
                             <thead>
                                 <tr>
@@ -89,7 +120,11 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row">
-                    <h3 class="m-t-none m-b">用户修改</h3>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="m-t-none m-b">用户修改</h3>
+
+                    </div>
                     <div class="col-sm-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-content">
@@ -157,7 +192,12 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row">
-                    <h3 class="m-t-none m-b">用户添加</h3>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="m-t-none m-b">用户添加</h3>
+
+                    </div>
+
                     <div class="col-sm-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-content">
@@ -196,7 +236,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-4 col-sm-offset-2">
                                             <button class="btn btn-primary" type="submit">保存内容</button>
-                                            <button class="btn btn-white" type="button" onclick="closeModal()">取消</button>
+                                            <button class="btn btn-white" type="button" onclick="closeModal( )" >取消</button>
                                         </div>
                                     </div>
                                 </form>
@@ -220,6 +260,9 @@
 <script src="/js/bootstrap-table.my.js"></script>
 <script src="/js/plugins/layer/layer.min.js"></script>
 <script src="/js/admin/user.js"></script>
+
+
+
 </body>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:06 GMT -->

@@ -1,5 +1,15 @@
 /*******用户相关********/
 
+
+function stateFormatter(value,row,index) {
+    if (value == 1)
+        return "启用";
+    else
+        return "禁用";
+}
+
+
+
 function sexFormatter(value, row, index) {
     if (value == 1)
         return "男";
@@ -30,7 +40,7 @@ function changeSate(id, state) {
             state: state
         },
         success: function () {
-            $('#userTable').bootstrapTable('refresh', {url: '/admin/user/list'});
+            $('#adminTable').bootstrapTable('refresh', {url: '/admin/user/list'});
         },
         dataType: "json"
     });
@@ -53,7 +63,7 @@ function deleteOne(id) {
             success: function (status) {
                 if (status == 1) {
                     layer.msg('删除成功', {icon: 1});
-                    $('#userTable').bootstrapTable('refresh', {url: '/admin/user/list'});
+                    $('#adminTable').bootstrapTable('refresh', {url: '/admin/user/list'});
                 }else {
                     layer.msg('删除失败', {icon: 1});
                 }

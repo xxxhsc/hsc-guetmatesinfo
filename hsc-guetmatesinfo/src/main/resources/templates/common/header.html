@@ -13,27 +13,6 @@
 
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
-                    <a  th:href="@{/}" >
-                    <i class="fa fa-desktop"></i>前台
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li class="divider"></li>
-                        <li>
-                            <div class="text-center link-block">
-                                <a class="J_menuItem" href="mailbox.html">
-                                    <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
                     </a>
@@ -66,6 +45,28 @@
                         </li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a  th:href="@{/}" >
+                    <i class="fa fa-desktop"></i>前台
+                    </a>
+                </li>
+                <!--<li class="dropdown">-->
+                    <!--<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">-->
+                        <!--<i class="fa fa-envelope"></i> <span class="label label-warning">16</span>-->
+                    <!--</a>-->
+                    <!--<ul class="dropdown-menu dropdown-messages">-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li>-->
+                            <!--<div class="text-center link-block">-->
+                                <!--<a class="J_menuItem" href="mailbox.html">-->
+                                    <!--<i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>-->
+                                <!--</a>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+
+
                 <li class="dropdown hidden-xs">
                     <a class="right-sidebar-toggle" aria-expanded="false">
                         <i class="fa fa-tasks"></i> 主题
@@ -99,7 +100,7 @@
             </ul>
         </div>
         <!--<a href="#" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>-->
-        <a href="javascript:void(0);" class="roll-nav roll-right J_tabReload "  ><i class="fa fa-refresh"></i> 刷新</a>
+        <a onclick="return false;" href="javascript:void(0);" class="roll-nav roll-right J_tabReload"  ><i class="fa fa-refresh"></i> 刷新</a>
         <!--<a th:href="@{logout}" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>-->
     </div>
     <div class="row J_mainContent" id="content-main">

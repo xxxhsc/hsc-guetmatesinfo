@@ -8,11 +8,11 @@
         <ul class="nav" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
-                    <span><img alt="image" class="img-circle" src="img/profile_small.jpg" /></span>
+                    <span><img alt="image" style="width:64px;height:64px" class="img-circle" th:src="${user.avatar}" /></span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
                                <span class="block m-t-xs"><strong class="font-bold" th:text="${user.username}">Beaut-zihan</strong></span>
-                                <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                                <span class="text-muted text-xs block">管理员<b class="caret"></b></span>
                                 </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -46,7 +46,7 @@
 
             </li>
             <li>
-                <a class="J_menuItem" href="/admin/picture/list.html"><i class="fa fa-columns"></i> <span class="nav-label">轮播图相册</span></a>
+                <a class="J_menuItem" href="/admin/file/index"><i class="fa fa-columns"></i> <span class="nav-label">轮播图相册</span></a>
             </li>
             <li>
                 <a href="#">
@@ -71,14 +71,11 @@
 
             <li>
 
-                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">用户审核 </span><span class="label label-warning pull-right">16</span></a>
+                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">留言 </span><span class="label label-warning pull-right">16</span></a>
                 <ul class="nav nav-second-level">
-                    <li><a class="J_menuItem" href="mailbox.html">收件箱</a>
+                    <li><a class="J_menuItem" href="admin/comment/index">留言管理</a>
                     </li>
-                    <li><a class="J_menuItem" href="mail_detail.html">查看邮件</a>
-                    </li>
-                    <li><a class="J_menuItem" href="mail_compose.html">写信</a>
-                    </li>
+
                 </ul>
             </li>
             <li>
@@ -88,59 +85,11 @@
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    <li> <a class="J_menuItem" href="admin/article/summernote.html" >富文本编辑器<span class="fa arrow"></span></a>
+                    <li> <a class="J_menuItem" href="admin/article/index" >文章发表</a>
                     </li>
-                    <li> <a class="J_menuItem" href="admin/article/article.html" >文章修改<span class="fa arrow"></span></a>
-
-                    </li>
-                    <li> <a>关于我们<span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level collapse">
-                            <li><a class="J_menuItem" href="">学校情况</a></li>
-                            <li><a class="J_menuItem" href="">总会简介</a></li>
-                            <li><a class="J_menuItem" href="">组织机构</a></li>
-                            <li><a class="J_menuItem" href="">地方分会</a></li>
-                            <li><a class="J_menuItem" href="">行业协会</a></li>
-                            <li><a class="J_menuItem" href="">规章制度</a></li>
-                            <li><a class="J_menuItem" href="">校友之家</a></li>
-                            <li><a class="J_menuItem" href="">联系我们</a></li>
-
-                        </ul>
-                    </li>
-                    <li> <a>新闻公告<span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level collapse">
-                            <li><a class="J_menuItem" href="">新闻动态</a></li>
-                            <li><a class="J_menuItem" href="">总会公告 </a></li>
-                            <li><a class="J_menuItem" href="">活动预告 </a> </li>
-                        </ul>
-                    </li>
-                    <li> <a>校友风采<span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level collapse">
-                            <li><a class="J_menuItem" href="">桂电人</a></li>
-                            <li><a class="J_menuItem" href="">校友企业 </a></li>
-                            <li><a class="J_menuItem" href="">桂电故事 </a> </li>
-                        </ul>
+                    <li> <a class="J_menuItem" href="admin/article/index2" >文章管理</a>
                     </li>
 
-                    <li> <a>校友服务<span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level collapse">
-                            <li><a class="J_menuItem" href="">返校指南</a></li>
-                            <li><a class="J_menuItem" href="">校友招聘 </a></li>
-                            <li><a class="J_menuItem" href="">校友卡申请 </a> </li>
-                            <li><a class="J_menuItem" href="">校友通讯 </a> </li>
-                        </ul>
-                    </li>
-                    <li> <a>校基金会<span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level collapse">
-                            <li><a class="J_menuItem" href="">基金会概况</a></li>
-                            <li><a class="J_menuItem" href="">理事会构成 </a></li>
-                            <li><a class="J_menuItem" href="">信息公开 </a> </li>
-                            <li><a class="J_menuItem" href="">捐赠指南 </a> </li>
-                            <li><a class="J_menuItem" href="">捐赠项目</a></li>
-                            <li><a class="J_menuItem" href="">捐赠鸣谢 </a></li>
-                            <li><a class="J_menuItem" href="">报账流程 </a> </li>
-                            <li><a class="J_menuItem" href="">联系我们 </a> </li>
-                        </ul>
-                    </li>
                 </ul>
             </li>
             <li>
@@ -151,7 +100,7 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a class="J_menuItem" href="xyhdlist.html" data-index="0">校友活动管理</a>
+                        <a class="J_menuItem" href="admin/activity/index" data-index="0">校友活动管理</a>
                     </li>
                 </ul>
             </li>

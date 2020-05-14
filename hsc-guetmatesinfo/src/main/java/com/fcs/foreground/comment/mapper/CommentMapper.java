@@ -20,7 +20,11 @@ import java.util.List;
 @Repository
 public interface CommentMapper extends BaseMapper<Comment> {
 
-    @Select("select * from t_comment where parentCommentId is null")
+    List<Comment> selectCommentList(Page page);
+
+
+
+    @Select("select * from t_comment where parentCommentId is null  and state = 1")
     @Results(value = {
             @Result(property = "uid",column = "uid"),
             @Result(property = "cid",column = "cid"),
@@ -30,7 +34,11 @@ public interface CommentMapper extends BaseMapper<Comment> {
     )
     List<Comment> selectAllParentCommentNull();
 
-    @Select("select * from t_comment where parentCommentId is null")
+
+
+
+    /*one一对一，many一对多*/
+    @Select("select * from t_comment where parentCommentId is null and state = 1")
     @Results(value = {
             @Result(property = "uid",column = "uid"),
             @Result(property = "cid",column = "cid"),
@@ -41,7 +49,7 @@ public interface CommentMapper extends BaseMapper<Comment> {
     List<Comment> selectAllParentCommentNullPage(Page  page);
 
 
-    @Select("select * from t_comment where parentCommentId=#{cid}")
+    @Select("select * from t_comment where parentCommentId=#{cid} and state = 1")
     @Results(value = {
             @Result(property = "replyCommentId",column = "replyCommentId"),
             @Result(property = "cid",column = "cid"),

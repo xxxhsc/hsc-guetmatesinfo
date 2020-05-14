@@ -4,6 +4,7 @@ import com.fcs.admin.user.entity.User;
 import com.fcs.common.util.StringUtils;
 import com.fcs.common.util.bean.BeanUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 
 /**
  * @Author: hsc
@@ -11,6 +12,13 @@ import org.apache.shiro.SecurityUtils;
  * @Date: 2020/5/6 22:59
  */
 public class ShiroUtils {
+
+    public static Session getSession()
+    {
+        return SecurityUtils.getSubject().getSession();
+    }
+
+
     public static User getuserinfo(){
         User user = null;
         // 取身份信息

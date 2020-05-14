@@ -28,7 +28,12 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     CommentMapper commentMapper;
 
 
-
+    @Override
+    public Page<Comment> selectCommentPage(Page<Comment> page) {
+        System.out.println("页面信息"+commentMapper.selectCommentList(page));
+        page.setRecords(commentMapper.selectCommentList(page));
+        return page;
+    }
 
     @Override
     public Page<Comment> commentPage(Page<Comment> commentPage) {
@@ -40,7 +45,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     }
 
     @Override
-    public boolean deleteComment(Integer cid) {
+    public boolean deleteComment(long cid) {
         int i = commentMapper.deleteById(cid);
         return true;
     }

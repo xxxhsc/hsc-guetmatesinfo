@@ -32,6 +32,7 @@ public class CommentController {
     @RequestMapping("/comment/postcomment")
     public String postcomment(Comment comment) {
         System.out.println("后台收到1comment数据"+comment);
+        comment.setState(1);
         if(commentService.saveComment(comment)){
             System.out.println("发送失败"+comment);
         }else {
@@ -56,7 +57,7 @@ public class CommentController {
     }
 
     @RequestMapping("/comment/delete")
-    public String deleteComment(Integer cid) {
+    public String deleteComment(Long cid) {
         boolean b = commentService.deleteComment(cid);
         return "redirect:/comment/commentlist";
     }
@@ -73,5 +74,11 @@ public class CommentController {
         model.addAttribute("comments",comments);
         return "note";
     }
+
+
+
+
+
+
 
 }

@@ -1,15 +1,13 @@
 /*
-*	Author: Pixel Art Inc.
-*	URL:	http://www.pixelartinc.com
+*	Author: hsc
+*	URL:	https://github.com/xxxhsc
 */
-
 
 jQuery(document).ready(function() {
 
     $ = jQuery;
 
-
-
+    //验证码
 
 
 
@@ -325,10 +323,15 @@ jQuery(document).ready(function() {
             }
         }
     });
-	
 
-	
-	
+
+
+    $(function() {
+        $('.imgcode').click(function() {
+            var url = "captcha/captchaImage?type=math" + "&s=" + Math.random();
+            $(".imgcode").attr("src", url);
+        });
+    });
 
 	
 });

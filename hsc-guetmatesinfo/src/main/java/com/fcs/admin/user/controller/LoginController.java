@@ -28,12 +28,12 @@ public class LoginController {
     private static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @RequestMapping("/login")
-    public String index(User iuser , @RequestParam("type") Integer type) {
+    public String index(User iuser , @RequestParam("type") Integer type,@RequestParam("validateCode") Integer validateCode) {
 
         String userName = iuser.getUsername();
 //            String md5Pwd = new Md5Hash(password, AuthConstant.salt).toString();
 //            String md5Pwd = new Md5Hash(password).toString();
-
+        System.out.println("验证码是："+validateCode);
         if(AuthSubjectUtil.checklogintype(userService.findRole(userService.findByName(iuser.getUsername()).getId()),type)){
             UsernamePasswordToken token = new UsernamePasswordToken(iuser.getUsername(), iuser.getPassword(), "login");
             Subject currentUser = SecurityUtils.getSubject();
@@ -96,18 +96,6 @@ public class LoginController {
 
     }
 
-    @RequestMapping("/register")
-    public int register(User user){
-        if(userService.findByName(user.getUsername())!=null){
-            /*提交一个启用申请*/
-            return 1;
-        }else{
-            /*新增一个用户注册*/
-            userService.insert(user);
-            /*提交一个启用申请*/
-            return 0;
-        }
-    }
     @RequestMapping(value = {"/403"})
     public String noAuth() {
         return "403";

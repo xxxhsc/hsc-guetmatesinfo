@@ -33,7 +33,7 @@ public class User extends Model<User> {
 	private int state;
 	private int sex;
 	private String remarks;
-	private Long snumber;
+	private String snumber;
 	private String sname;
 	private String smajor;
 	private String semail;

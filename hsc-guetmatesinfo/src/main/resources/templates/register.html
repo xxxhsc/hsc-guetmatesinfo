@@ -62,37 +62,32 @@
 						<div class="signin-form">
 							<div class=" ">
 								<div class=" ">
-
+									<!--<input type="hidden" name="id"  value="100" id="id">-->
 										<div class="form-group">
 										    <label for="sname">姓名</label>
-										    <input type="text" minlength="2" class="form-control" name="myname" id="sname" placeholder="学籍中姓名" required>
+										    <input type="text" minlength="2" class="form-control" name="sname" id="sname" placeholder="学籍中姓名" required>
 										</div><!--/.form-group -->
 										<div class="form-group">
 											<label for="snumber">学号</label>
-										    <input type="text" maxlength="10" digits:true class="form-control" id="snumber" placeholder="学籍中学号" required>
+										    <input type="text" maxlength="10" class="form-control" name="snumber" id="snumber" placeholder="学籍中学号" required>
 										</div><!--/.form-group -->
 										<div class="form-group">
 											<label >性别</label>
 										    <!--<input type="text" name="sex" class="form-control" id="signin_form3" placeholder="学籍中性别" >-->
-											<select class="form-control m-b" name="sex" placeholder="学籍中性别">
-												<option>男</option>
-												<option>女</option>
-												<option>未知</option>
+											<select class="form-control m-b" name="sex" id="sex" placeholder="学籍中性别" onchange="this.options[this.options.selectedIndex].value">
+												<option value="1">男</option>
+												<option value="0">女</option>
+												<option value=null>未知</option>
 											</select>
 										</div><!--/.form-group -->
 										<div class="form-group">
-											<label for="signin_form4">院系</label>
-										    <input type="text" class="form-control" id="signin_form4" placeholder="学籍中院系(例：计算机与安全学院)" required>
+											<label for="scollege">院系</label>
+										    <input type="text" class="form-control" id="scollege"  name="scollege" placeholder="学籍中院系(例：计算机与安全学院)" required>
 										</div><!--/.form-group -->
 										<div class="form-group">
 											<label for="smajor">专业</label>
-											<input type="text" name="major" class="form-control" id="smajor" placeholder="学籍中专业（例：软件工程）" required>
+											<input type="text" name="smajor" class="form-control" id="smajor" placeholder="学籍中专业（例：软件工程）" required>
 										</div><!--/.form-group -->
-										<div class="form-group">
-											<label for="semail">邮箱</label>
-											<input type="email" name="email" class="form-control" id="semail" placeholder="用于方便联系或找回密码的邮箱" required>
-										</div><!--/.form-group -->
-
 								</div><!--/.col -->
 							</div><!--/.row -->
 
@@ -158,7 +153,10 @@
 		<script type="text/javascript">
 			$(function(){
 				$("#myform").validate();
+
 			});
+
+
 		</script>
     </body>
 	

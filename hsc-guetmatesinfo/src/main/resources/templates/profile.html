@@ -66,10 +66,8 @@
 
                                 <h2>资本资料</h2>
                                 <form>
-                                    <h3>个人资料</h3>
+                                    <h3>个人实际资料</h3>
                                     <div class="clearfix"></div>
-                                    <label>昵称:</label>
-                                    <input type="text" th:value="${user.snumber}"  />
                                     <label>工作单位: </label>
                                     <input type="text"/>
                                     <label>工作岗位: </label>
@@ -98,7 +96,6 @@
                                         <h3>桂林电子科技大学</h3>
                                         <ul>
                                             <li><span>学号</span><th:block th:text="${user.snumber}" /> </li>
-
                                             <li ><span>姓名</span><th:block th:text="${user.sname}" /> </li>
                                             <li><span>性别</span><th:block th:text="${user.sex==1}?男 "/> <th:block th:text="${user.sex==0}?女 "/> </li>
                                             <li><span>院系</span><th:block th:text="${user.scollege}" /> </li>

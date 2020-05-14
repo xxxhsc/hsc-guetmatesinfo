@@ -30,6 +30,9 @@ public class RoleController {
         return "admin/role/list";
     }
 
+
+
+
     @RequiresPermissions("admin:role:view")
     @RequestMapping("/list")
     @ResponseBody

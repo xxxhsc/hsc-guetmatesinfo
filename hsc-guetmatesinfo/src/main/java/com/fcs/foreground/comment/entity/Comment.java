@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fcs.admin.user.entity.User;
 import lombok.Data;
 
@@ -27,10 +28,11 @@ public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "cid", type = IdType.AUTO)
-    private Integer cid;
+    private Long cid;
 
-    private Integer uid;
+    private Long uid;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField("createTime")
     private Date createTime;
 
@@ -56,6 +58,8 @@ public class Comment implements Serializable {
 
     @TableField(exist = false)
     private Comment replyToComment;
+
+    private int state;
 
 
 }

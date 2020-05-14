@@ -458,10 +458,20 @@ nav > ul > li ul li a:hover { color: #017eba; }
 	Sidebar
 ****************************************************************************/
 aside { background: #272727; padding: 20px; border-radius: 3px; }
+.top{
+    border-bottom: 1px solid #f2f2f2;
+    background: #fafafa;
+    text-align: center;
+    padding: 25px 0px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
 
-.checking_form { background: #ffffff; padding: 30px 15px; height: auto !important;width: 72.6%; }
+
+.checking_form { background: #ffffff; padding: 30px 15px; height: auto !important; }
 .checking_form form > p { font:12px 'gotham_roundedmedium',Times New Roman, Times, serif; color: #5a656a; margin-top: 15px;}
 .checking_form form > p span {font:36px 'gotham_roundedmedium',Times New Roman, Times, serif;  color: #017db8; float: right; vertical-align: middle; margin-top: -17px;}
+
 
 checking_form input {  }
 .checking_form .trip { margin-bottom: 20px; }
@@ -492,13 +502,21 @@ checking_form input {  }
 .check_detail p.first {background: url("../Images/fcility_bg.png") left center no-repeat;}
 .check_detail p.two {background: url("../Images/fcility_tick.png") left center no-repeat;}
 
-.check_detail { padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px dashed #d1d1d1; }
+.check_detail {margin-left: 10px; padding-top: 10px;padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px dashed #d1d1d1; }
 .check_detail h4 {color: #0f0f0f; text-transform: uppercase; margin-bottom: 4px; }
 .check_detail h5 {color: #2f2f2f; font-size: 14px; text-transform: uppercase; display: inline-block; }
+
+
+
 .check_detail .stars { display: inline-block; float: right; }
 .checking_form .ui-spinner-up span { position: absolute; top: 6px;  }
 .checking_form .ui-spinner-down span { position: absolute; top: 12px; }
-
+.check_detail span{
+    float: right!important;
+    font: 18px 'gotham_roundedlight',Times New Roman, Times, serif!important;
+    color: #0f0f0f; text-transform: uppercase; margin-bottom: 4px;
+    _display: inline;
+}
 
 #widget_accordion { width: 84%; }
 #widget_accordion h3 { outline: none; cursor: pointer; position: relative;  font:15px 'gotham_roundedlight',Times New Roman, Times, serif; color: #0f0f0f;background: #f5f4f4; padding: 10.6px 0px 10px 24px; }
@@ -657,7 +675,7 @@ checking_form input {  }
 .confrm.booking .top h3 { font-size: 30px; }
 .confrm.booking .top h4 span {color: #017eba; font:18px 'gotham_roundedmedium',Times New Roman, Times, serif; }
 
-.booking .bottom {background: #ffffff; padding: 0px 0px 70px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;  }
+.booking .bottom {background: #ffffff; padding: 10px 0px 70px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;  }
 .booking_form p { margin-bottom: 20px; width: 75%; }
 .booking_form { border-right: 1px dashed #d1d1d1; }
 .booking .bottom h2 {font-size: 14px; border-bottom: 1px dashed #d1d1d1; padding-bottom: 5px; margin-bottom: 15px; color: #0f0f0f; text-transform: uppercase;}

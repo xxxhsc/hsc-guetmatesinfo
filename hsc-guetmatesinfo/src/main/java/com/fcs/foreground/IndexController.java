@@ -1,11 +1,16 @@
-package com.fcs.foreground.comment.web;
+package com.fcs.foreground;
 
 
+import com.fcs.admin.file.entity.File;
+import com.fcs.admin.file.service.IFileService;
 import com.fcs.admin.user.entity.User;
 import com.fcs.common.util.ShiroUtils.ShiroUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * @Author: hsc
@@ -15,6 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
+
+    @Autowired
+    IFileService fileService;
+
 
     @RequestMapping("/admin")
     public String index(Model model) {
@@ -52,10 +61,9 @@ public class IndexController {
     }
     @RequestMapping("/")
     public String foregroundindex(Model model) {
-        System.out.println("首页");
+        List<File> picturelist =fileService.selectPitureOn();
+        model.addAttribute("picturelist",picturelist);
         model.addAttribute("user",ShiroUtils.getuserinfo());
-
-        System.out.println("首页用户信息"+ShiroUtils.getuserinfo());
         return "index";
     }
 
@@ -64,7 +72,7 @@ public class IndexController {
     public String details(Model model){
         System.out.println("详情页");
 
-        return "details";
+        return "articlelist";
     }
 
 }

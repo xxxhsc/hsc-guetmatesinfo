@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<!--[if IE 7]>    <html class="ie7" > <![endif]-->
+<!--[if IE 8]>    <html class="ie8" > <![endif]-->
+<!--[if IE 9]>    <html class="ie9" > <![endif]-->
+<!--[if IE 9]>    <html class="ie10" > <![endif]-->
+<!--[if (gt IE 10)|!(IE)]>&lt;!&ndash;dash;&gt; <html lang="en-US"> &lt;!&ndash;<![endif]-->
+<head>
+    <!-- META TAGS -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Title -->
+    <title>桂林电子科技大学校友网</title>
+
+    <!-- Style Sheet-->
+
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/flexslider.css">
+
+
+
+
+    <!--[if lt IE 9]>
+
+
+    <![endif]-->
+</head>
+<body>
+<!-- HEADER TOP -->
+<div id="top"></div>
+
+<!-- HEADER IOP -->
+
+<nav  th:include="foreground/header :: header"  ></nav>
+
+<!-- Crum -->
+<div class="crum-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <a href="">首页</a>
+
+                <span class="crum"><a href="">校友活动</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Crum-->
+
+<!-- Grid page -->
+<div class="content trave_detail">
+    <div class="container">
+        <div class="row">
+
+            <div class="span3" id="sidebar">
+                <div class="top">
+                    <h3>关于我们</h3>
+                </div>
+                <div class="widget checking_form clearfix">
+
+                    <div  class="clearfixc">
+                        <div class="check_detail">
+                            <a th:href="@{articlelist}"><h4>学校情况</h4></a>
+                        </div>
+                        <div class="check_detail">
+                            <h4>总会简介</h4>
+                        </div>
+                        <div class="check_detail">
+                            <h4>组织机构</h4>
+                        </div>
+                        <div class="check_detail">
+                            <h4>地方分会</h4>
+                        </div>
+                        <div class="check_detail">
+                            <h4>行业协会</h4>
+                        </div>
+                        <div class="check_detail">
+                            <h4>规章制度</h4>
+                        </div>
+                        <div class="check_detail">
+                            <h4>校友之家</h4>
+                        </div>
+                        <div class="check_detail">
+                            <h4>联系我们</h4>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <div class="span9 right_content">
+                <div class="container">
+                    <div class="row">
+                        <div class="span9 booking clearfix">
+                            <div class="top">
+                                <h3>这是文章标题</h3>
+
+
+                            </div>
+                            <div class="bottom clearfix">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+<!-- Grid page -->
+
+
+<!--底部-->
+<nav th:include="foreground/footer :: footer"  ></nav>
+<!--底部结束-->
+
+
+
+
+<!-- Scripts -->
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/jquery.flexslider.js"></script>
+<script src="js/jquery.flexslider-min.js"></script>
+<script src="js/jquery.elastislide.js"></script>
+<script src="js/jquery.carouFredSel-6.0.4-packed.js"></script>
+<script src="js/jcarousellite_1.0.1.js"></script>
+<script src="js/jquery.cycle.all.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/jquery.isotope.min.js"></script>
+<script src="js/jquery.tinyscrollbar.min.js"></script>
+<script src="js/foreground/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.scrollbar1').tinyscrollbar();
+    });
+</script>
+<script src="js/custom.js"></script>
+</body>
+</html>

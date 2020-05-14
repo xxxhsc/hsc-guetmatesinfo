@@ -20,12 +20,13 @@ public interface ICommentService extends IService<Comment> {
      boolean saveComment(Comment comment);
 
 
+     Page<Comment> selectCommentPage(Page<Comment> page);
 
      List<Comment> commentList();
 
      Page<Comment> commentPage(Page<Comment> commentPage);
 
-     boolean deleteComment(Integer cid);
+     boolean deleteComment(long cid);
 
 
 }

@@ -2,17 +2,20 @@ package com.fcs.common.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.fcs.common.ShiroRealm;
+import com.fcs.common.shiro.web.filter.captcha.CaptchaValidateFilter;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -23,6 +26,16 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfiguration {
+
+
+    // 验证码开关
+    @Value("${shiro.user.captchaEnabled}")
+    private boolean captchaEnabled;
+
+    // 验证码类型
+    @Value("${shiro.user.captchaType}")
+    private String captchaType;
+
 
     @Bean(name = "lifecycleBeanPostProcessor")
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
@@ -93,13 +106,14 @@ public class ShiroConfiguration {
         filterChainDefinitionManager.put("/profile", "authc");
         filterChainDefinitionManager.put("/note", "authc");
 
-//        filterChainDefinitionManager.put("/logout", "logout");
-//        filterChainDefinitionManager.put("/user/**", "authc,roles[user]");
-//        filterChainDefinitionManager.put("/shop/**", "authc,roles[shop]");
         filterChainDefinitionManager.put("/admin/**", "authc,roles[guetmates,admin]");
-//        filterChainDefinitionManager.put("/admin/**", "authc");
-//未授权界面;
+
+
+        Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
+        filters.put("captchaValidate", captchaValidateFilter());
+        //未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+        shiroFilterFactoryBean.setFilters(filters);
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
 
         return shiroFilterFactoryBean;
@@ -123,6 +137,20 @@ public class ShiroConfiguration {
     @Bean(name = "shiroDialect")
     public ShiroDialect shiroDialect(){
         return new ShiroDialect();
+    }
+
+
+
+    /**
+     * 自定义验证码过滤器
+     */
+    @Bean
+    public CaptchaValidateFilter captchaValidateFilter()
+    {
+        CaptchaValidateFilter captchaValidateFilter = new CaptchaValidateFilter();
+        captchaValidateFilter.setCaptchaEnabled(captchaEnabled);
+        captchaValidateFilter.setCaptchaType(captchaType);
+        return captchaValidateFilter;
     }
 
 }
