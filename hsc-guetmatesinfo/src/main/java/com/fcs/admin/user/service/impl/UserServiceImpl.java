@@ -64,4 +64,5 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public List<UserRole> findRole(long uid) {
         return userRoleMapper.findRoleidListByUserId(uid);
     }
+
 }

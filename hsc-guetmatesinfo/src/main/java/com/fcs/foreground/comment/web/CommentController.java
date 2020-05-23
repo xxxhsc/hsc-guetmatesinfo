@@ -32,7 +32,7 @@ public class CommentController {
     @RequestMapping("/comment/postcomment")
     public String postcomment(Comment comment) {
         System.out.println("后台收到1comment数据"+comment);
-        comment.setState(1);
+        comment.setStatus(1);
         if(commentService.saveComment(comment)){
             System.out.println("发送失败"+comment);
         }else {

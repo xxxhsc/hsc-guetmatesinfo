@@ -57,32 +57,30 @@
                                 <h2>修改头像</h2>
                                 <h3>头像预览</h3>
                                 <ul>
-                                    <img style="width:100px;height:100px" id="imgEmdImg" class="img-circle" src="Images/headimg.jpeg">
+                                    <img style="width:100px;height:100px" id="imgEmdImg" class="img-circle" th:src="${user.avatar}">
 
-                                    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">选择照片</button>
+                                    <button  id="btnImg" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">选择照片</button>
 
                                 </ul>
 
-
                                 <h2>资本资料</h2>
-                                <form>
+                                <form id="profile_form" action="/mate/update" method="post">
+                                    <input type="hidden" name="id" th:value="${user.id}" id="uid">
                                     <h3>个人实际资料</h3>
                                     <div class="clearfix"></div>
                                     <label>工作单位: </label>
-                                    <input type="text"/>
+                                    <input name="company" type="text"th:value="${user.company}"/>
                                     <label>工作岗位: </label>
-                                    <input type="text"/>
+                                    <input name="post" type="text" th:value="${user.post}"/>
                                     <label>工作地点: </label>
-                                    <input type="text"/>
+                                    <input name="workplace"type="text" th:value="${user.workplace}"/>
                                     <label>手机号码: </label>
-                                    <input type="text"   th:value="${user.phone}"  />
+                                    <input name="phone"type="text"   th:value="${user.phone}"  />
                                     <label>邮箱: </label>
-                                    <input type="text" th:value="${user.semail}" />
+                                    <input name="email"type="text" th:value="${user.email}" />
+                                    <br>
+                                    <button style="align-self:center;" class="btn btn-primary btn-lg" type="submit"  >保 存</button>
                                 </form>
-
-
-
-
                             </div>
                         </div>
                     </div>
@@ -100,7 +98,7 @@
                                             <li><span>性别</span><th:block th:text="${user.sex==1}?男 "/> <th:block th:text="${user.sex==0}?女 "/> </li>
                                             <li><span>院系</span><th:block th:text="${user.scollege}" /> </li>
                                             <li><span>专业</span><th:block th:text="${user.smajor}" /> </li>
-                                            <li><span>入学年份</span><th:block th:text="${user.snumber}" /> </li>
+                                            <!--<li><span>入学年份</span><th:block th:text="${user.snumber}" /> </li>-->
                                         </ul>
 
                                     </div>
@@ -108,7 +106,7 @@
 
                                     <form>
 
-                                        <input type="submit" value="保 存"/>
+                                        <input onclick='doSubmitForm()' type="submit" value="保 存" />
                                     </form>
 
                                 </div>
@@ -137,7 +135,7 @@
             <div class="modal-body" >
                 <div class="form-group">
                     <div class="file-loading">
-                        <input id="file-1d" class="file" type="file" data-theme="fas">
+                        <input id="uploadPicture" name="file" type="file" multiple=true class="file-loading">
                     </div>
                 </div>
             </div>
@@ -181,9 +179,53 @@
     }
 </script>
 <script type="text/javascript">
+    $(function () {
+        $("#uploadPicture").fileinput({
+            uploadUrl: "/mate/UploadFile",
+            previewFileType: "image",
+            uploadAsync: true,
+            showCaption: false,
+            allowedFileExtensions: ["png", "jpg", "jpeg", "ico", "bmp", "gif"],
+            maxFileCount: 1,
+            maxFileSize: 3072,
+            showBrowse: true,
+            dropZoneTitle: '拖拽头像图片到这里...',
+            browseLabel: "选择头像图片",
+            uploadClass: "btn btn-info",
+            uploadLabel: "上传",
+            removeClass: "btn btn-danger",
+            autoReplace: true,
+            removeLabel: "移除",
+            msgSizeTooLarge: '图片文件太大！',
+            msgFilesTooMany: "选择上传的文件数量为({n}) 超过允许的最大数值({m})！",
+            msgUploadEnd: '图片上传成功！',
+            msgUploadBegin: '初始化中...',
+            msgZoomModalHeading: '图片详情预览',
+            msgInvalidFileExtension: '非法文件扩展名 "{name}"！ 仅支持 "{extensions}" 的文件扩展名！'
+        }).on('fileerror', function (event, data, msg) {
+            alert('图片上传失败！' + msg);
+        }).on('fileuploaded', function (event, data) {
+           alert("图片上传成功")
+            location.reload();
+        }).on('fileclear', function (event) {
+            alert("图片被清除啦！");
+        });
+        ;
+    });
+
+
+
     $(document).ready(function(){
         $('.scrollbar1').tinyscrollbar();
     });
+
+function doSubmitForm(){
+    var form = document.getElementById('profile_form');
+    //再次修改input内容
+    form.submit();
+}
+
+
 </script>
 <script src="js/custom.js"></script>
 </body>

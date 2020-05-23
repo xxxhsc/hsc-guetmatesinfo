@@ -9,14 +9,17 @@
 		<result column="password" property="password" />
 		<result column="phone" property="phone" />
 		<result column="sex" property="sex" />
-		<result column="state" property="state" />
+		<result column="status" property="status" />
 		<result column="remarks" property="remarks" />
 		<result column="snumber" property="snumber" />
 		<result column="sname" property="sname" />
 		<result column="smajor" property="smajor" />
-		<result column="semail" property="semail" />
+		<result column="email" property="email" />
 		<result column="scollege" property="scollege" />
 		<result column="avatar" property="avatar"/>
+		<result column="workplace" property="workplace"/>
+		<result column="company" property="company"/>
+		<result column="post" property="post"/>
 		<!--<collection property="roleList"  column="id" ofType="Role">-->
 		<!--<id property="id" column="id"/>-->
 		<!--<result property="name" column="name"/>-->
@@ -25,11 +28,11 @@
 	</resultMap>
 
 	<select id="findByName" resultType="com.fcs.admin.user.entity.User" parameterType="java.lang.String">
-		SELECT id,username,password,phone,sex,state,remarks,snumber,sname,smajor,semail,scollege,avatar from t_user where username=#{name}
+		SELECT id,username,password,phone,sex,status,remarks,snumber,sname,smajor,email,scollege,avatar,workplace,company,post from t_user where username=#{name}
 	</select>
 
 	<select id="selectUserList" resultType="User">
-		SELECT id,username,phone,sex,state,remarks FROM t_user
+		SELECT id,username,phone,sex,status,remarks FROM t_user
 	</select>
 
 </mapper>

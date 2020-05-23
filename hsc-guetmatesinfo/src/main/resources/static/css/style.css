@@ -217,6 +217,17 @@ p { font: 14px 'proxima_nova_rgregular',Times New Roman, Times, serif; color: #9
 #login-popup #login-button { font: 700 22px 'gotham_roundedmedium', Helvetica, sans-serif; color: #ffffff;   background:#017eba; border:3px;  padding: 15px 50px; margin: 0 auto; text-align:	center;}
 
 
+/****************************************************************************
+							resetPwd
+****************************************************************************/
+.resetPwd-popup-wrapper { display: none; width: 100%; height: 100%; position:fixed; top: 0; left: 0; background: url(../Images/bg.png) repeat; z-index: 9998; }
+#resetPwd-popup { display:none; position: fixed; top:20%; left:55%; margin: -45px 0 0 -185px; width:246px; padding: 57px 40px 26px 40px; background:#fff; border:3px solid #017eba; z-index: 9999; }
+#resetPwd-popup h2 { color: #342323; margin-bottom: 17px; }
+
+#resetPwd-popup form #username { font: 400 14px 'Arial', Helvetica, sans-serif; font-style:italic; color:#808181; display:block; width:88%; background:#fff; outline:none; padding:10px 20px ; border:1px solid #ebe8e3;  border-radius:0px; }
+#resetPwd-popup form #password {  font: 400 14px 'Arial', Helvetica, sans-serif; font-style:italic; color:#808181; display:block; width:88%; background:#fff; outline:none; padding:10px 20px ; border:1px solid #ebe8e3;  border-radius:0px; }
+
+#resetPwd-popup #resetPwd-button { font: 700 22px 'gotham_roundedmedium', Helvetica, sans-serif; color: #ffffff;   background:#017eba; border:3px;  padding: 8px 8px; margin: 0 auto; text-align:	center;}
 
 /****************************************************************************
 	Main Navigation
@@ -676,6 +687,7 @@ checking_form input {  }
 .confrm.booking .top h4 span {color: #017eba; font:18px 'gotham_roundedmedium',Times New Roman, Times, serif; }
 
 .booking .bottom {background: #ffffff; padding: 10px 0px 70px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;  }
+.booking .bottom .info{ position: relative;  padding-right: 300px; text-align: center;}
 .booking_form p { margin-bottom: 20px; width: 75%; }
 .booking_form { border-right: 1px dashed #d1d1d1; }
 .booking .bottom h2 {font-size: 14px; border-bottom: 1px dashed #d1d1d1; padding-bottom: 5px; margin-bottom: 15px; color: #0f0f0f; text-transform: uppercase;}

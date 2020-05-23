@@ -10,10 +10,10 @@ function stateFormatter(value,row,index) {
 
 
 function actionFormatter(value, row, index) {
-    var state = row.state;
+    var status = row.status;
     var acid = row.acid;
     var res = '<button data-toggle="modal" class="btn btn-primary" href="list.html#modal-form" data-row='+acid+'>修改</button>';
-    if (state == 1)
+    if (status == 1)
         res += ' <button type="button" class="btn btn-default" onclick="changeSate(\'' + acid + '\',0)" >禁用</button>';
     else
         res += ' <button typ-e="button" class="btn btn-info" onclick="changeSate(\'' + acid + '\',1)" >启用</button>';
@@ -21,13 +21,13 @@ function actionFormatter(value, row, index) {
     return res;
 }
 
-function changeSate(acid, state) {
+function changeSate(acid, status) {
     $.ajax({
         type: 'POST',
         url: "changeState",
         data: {
             acid: acid,
-            state: state
+            status: status
         },
         success: function () {
             $('#adminTable').bootstrapTable('refresh', {url: '/admin/activity/list'});

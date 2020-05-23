@@ -20,10 +20,10 @@ function sexFormatter(value, row, index) {
 }
 
 function actionFormatter(value, row, index) {
-    var state = row.state;
+    var status = row.status;
     var cid = row.cid;
     var res = '';
-    if (state == 1)
+    if (status == 1)
         res += ' <button type="button" class="btn btn-default" onclick="changeSate(\'' + cid + '\',0)" >禁用</button>';
     else
         res += ' <button typ-e="button" class="btn btn-info" onclick="changeSate(\'' + cid + '\',1)" >启用</button>';
@@ -31,13 +31,13 @@ function actionFormatter(value, row, index) {
     return res;
 }
 
-function changeSate(cid, state) {
+function changeSate(cid, status) {
     $.ajax({
         type: 'POST',
         url: "changeState",
         data: {
             cid: cid,
-            state: state
+            status: status
         },
         success: function () {
             $('#adminTable').bootstrapTable('refresh', {url: '/admin/comment/list'});

@@ -24,7 +24,7 @@ public interface CommentMapper extends BaseMapper<Comment> {
 
 
 
-    @Select("select * from t_comment where parentCommentId is null  and state = 1")
+    @Select("select * from t_comment where parentCommentId is null  and status = 1")
     @Results(value = {
             @Result(property = "uid",column = "uid"),
             @Result(property = "cid",column = "cid"),
@@ -38,7 +38,7 @@ public interface CommentMapper extends BaseMapper<Comment> {
 
 
     /*one一对一，many一对多*/
-    @Select("select * from t_comment where parentCommentId is null and state = 1")
+    @Select("select * from t_comment where parentCommentId is null and status = 1")
     @Results(value = {
             @Result(property = "uid",column = "uid"),
             @Result(property = "cid",column = "cid"),
@@ -49,7 +49,7 @@ public interface CommentMapper extends BaseMapper<Comment> {
     List<Comment> selectAllParentCommentNullPage(Page  page);
 
 
-    @Select("select * from t_comment where parentCommentId=#{cid} and state = 1")
+    @Select("select * from t_comment where parentCommentId=#{cid} and status = 1")
     @Results(value = {
             @Result(property = "replyCommentId",column = "replyCommentId"),
             @Result(property = "cid",column = "cid"),

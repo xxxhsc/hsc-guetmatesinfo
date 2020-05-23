@@ -59,7 +59,7 @@ public class Comment implements Serializable {
     @TableField(exist = false)
     private Comment replyToComment;
 
-    private int state;
+    private int status;
 
 
 }

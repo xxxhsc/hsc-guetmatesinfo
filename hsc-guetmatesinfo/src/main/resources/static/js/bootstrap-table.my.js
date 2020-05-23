@@ -12,3 +12,8 @@ function stateFormatter(value,row,index) {
     else
         return "禁用";
 }
+
+
+
+//顺便提一句，获取选择的表项用
+$("#table").bootstrapTable('getSelections');

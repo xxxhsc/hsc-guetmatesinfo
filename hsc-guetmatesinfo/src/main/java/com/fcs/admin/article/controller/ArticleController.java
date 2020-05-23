@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -30,6 +31,8 @@ public class ArticleController {
 
 
 
+
+
     /**
      * summernote 富文本编辑器
      */
@@ -38,9 +41,9 @@ public class ArticleController {
     @RequestMapping("/index")
     public String index(Model model) {
         List<Type> FirstTypelist = articleService.FirstTypesList();
-        List<Type> SencondTypelist=articleService.SencondTypesList();
+//        List<Type> SencondTypelist=articleService.SencondTypesList();
         model.addAttribute("FirstTypelist",FirstTypelist);
-        model.addAttribute("SencondTypeList",SencondTypelist);
+//        model.addAttribute("SencondTypeList",SencondTypelist);
         return "admin/article/summernote";
     }
 
@@ -49,7 +52,9 @@ public class ArticleController {
      */
     @RequiresPermissions("admin:article:view")
     @RequestMapping("/index2")
-    public String articlelist() {
+    public String articlelist(Model model) {
+        List<Type> FirstTypelist = articleService.FirstTypesList();
+        model.addAttribute("FirstTypelist",FirstTypelist);
         return "admin/article/articlelist";
     }
 
@@ -57,10 +62,24 @@ public class ArticleController {
     @RequestMapping("/articlelist")
     @ResponseBody
     public Page<Article> list() {
+
         Page<Article> page = articleService.selectArticlePage(new Page<Article>(0, 12));
         return page;
     }
 
+    @RequestMapping("/getArticleTypeById")
+    @ResponseBody
+    public String getArticleTypeById(long aid) {
+        return  articleService.getArticleTypeById(aid).getLabel();
+    }
+
+    @RequestMapping("/updatestatus")
+    @ResponseBody
+    public String updatestatus(long aid, int status) {
+        System.out.println("id为"+aid+"状态为"+status);
+        articleService.updatestatus(aid,status);
+        return "success";
+    }
 
 
 
@@ -68,10 +87,10 @@ public class ArticleController {
 
     @RequestMapping("/changeState")
     @ResponseBody
-    public String changeState(long aid, int state) {
+    public String changeState(long aid, int status) {
         Article article = new Article();
         article.setAid(aid);
-        article.setState(state);
+        article.setStatus(status);
         articleService.updateById(article);
         return "success";
     }

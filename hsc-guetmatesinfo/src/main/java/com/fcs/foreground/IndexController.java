@@ -67,6 +67,15 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping("/activitydetails")
+    public String activitydetails(Model model) {
+//        List<File> picturelist =fileService.selectPitureOn();
+//        model.addAttribute("picturelist",picturelist);
+//        model.addAttribute("user",ShiroUtils.getuserinfo());
+        return "activitydetails";
+    }
+
+
 
     @RequestMapping("/details")
     public String details(Model model){

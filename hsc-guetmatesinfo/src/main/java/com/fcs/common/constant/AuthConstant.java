@@ -22,6 +22,6 @@ public class AuthConstant {
     /**
      * salt 撒盐加密
      */
-    public static final String salt = "skeleton";
+    public static final String salt = "hsc";
 
 }

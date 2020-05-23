@@ -39,17 +39,31 @@
         <div class="ibox-content">
             <div class="row row-lg">
                 <div class="col-sm-12">
+                    <!-- Example Toolbar -->
+
+                    <div class="btn-group-sm" id="toolbar" role="group">
+                        <button data-toggle="modal" class="btn btn-primary" href="#modal-add-form" shiro:hasPermission="system:user:add">
+                            <i class="fa fa-plus"></i> 新增
+                        </button>
+                        <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:user:remove">
+                            <i class="fa fa-remove"></i> 删除
+                        </a>
+                    </div>
+                    <!-- End Example Toolbar -->
+
+
+
                     <h4 class="example-title">权限列表</h4>
                     <div class="example">
                         <table id="adminTable"  data-toggle="table" data-url="/admin/file/list" data-height="600" data-response-handler="handlerData"
-                               data-pagination="true" data-mobile-responsive="true" cache="false">
+                               data-pagination="true" data-mobile-responsive="true" cache="false" data-search="true" data-show-columns="true">
                             <thead>
                             <tr>
-                                <th data-width="5%"><input name="checkAll" type="checkbox" value="" /></th>
+                                <th data-field="state" data-width="5%" data-checkbox="true"></th>
                                 <th data-field="fid" data-width="15%">ID</th>
                                 <th data-field="type" data-width="15%">类型</th>
                                 <th data-field="url" data-width="15%">url文件地址</th>
-                                <th data-field="state" data-width="10%" data-formatter="stateFormatter">状态</th>
+                                <th data-field="status" data-width="10%" data-formatter="stateFormatter">状态</th>
                                 <th data-width="20%" data-formatter="actionFormatter">操作</th>
                             </tr>
                             </thead>

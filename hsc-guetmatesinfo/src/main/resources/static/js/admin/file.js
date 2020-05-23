@@ -1,14 +1,14 @@
-function stateFormatter(value,row,index) {
+function statusFormatter(value,row,index) {
     if (value == 1)
         return "启用";
     else
         return "禁用";
 }
 function actionFormatter(value, row, index) {
-    var state = row.state;
+    var status = row.status;
     var id = row.fid;
     var res = '';
-    if (state == 1)
+    if (status == 1)
         res += ' <button type="button" class="btn btn-default" onclick="changeSate(\'' + id + '\',0)" >禁用</button>';
     else
         res += ' <button typ-e="button" class="btn btn-info" onclick="changeSate(\'' + id + '\',1)" >启用</button>';
@@ -16,13 +16,13 @@ function actionFormatter(value, row, index) {
     return res;
 }
 
-function changeSate(id, state) {
+function changeSate(id, status) {
     $.ajax({
         type: 'POST',
         url: "changeState",
         data: {
             fid: id,
-            state: state
+            status: status
         },
         success: function () {
             $('#adminTable').bootstrapTable('refresh', {url: '/admin/file/list'});

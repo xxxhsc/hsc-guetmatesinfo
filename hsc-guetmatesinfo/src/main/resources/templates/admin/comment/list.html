@@ -15,37 +15,6 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="ibox float-e-margins">
-
-        <div class="ibox-content">
-            <div class="row row-lg">
-                <div class="col-sm-12">
-                    <!-- Example Toolbar -->
-                    <div class="example-wrap">
-                        <div class="example">
-                            <div class="btn-group hidden-xs" id="exampleSearchbar" role="group">
-                                <button data-toggle="modal" class="btn btn-outline btn-default" href="#modal-add-form" >
-                                    <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                                </button>
-                                <!--<button type="button" class="btn btn-outline btn-default">-->
-                                <!--<i class="glyphicon glyphicon-heart" aria-hidden="true"></i>-->
-                                <!--</button>-->
-                                <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Example Toolbar -->
-                </div>
-                <div class="col-sm-12">
-                    <div class="example">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h5>留言管理</h5>
             <div class="ibox-tools">
@@ -69,18 +38,34 @@
         <div class="ibox-content">
             <div class="row row-lg">
                 <div class="col-sm-12">
+                    <!-- Example Toolbar -->
+                    <div class="btn-group-sm" id="toolbar" role="group">
+                        <a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="system:user:add">
+                             禁用
+                        </a>
+                        <a class="btn btn-info" onclick="$.table.importExcel()" shiro:hasPermission="system:user:import">
+                            启用
+                        </a>
+                        <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:user:remove">
+                            <i class="fa fa-remove"></i> 删除
+                        </a>
+                    </div>
+                    <!-- End Example Toolbar -->
+                </div>
+                <div class="col-sm-12">
                     <h4 class="example-title">留言列表</h4>
                     <div class="example">
                         <table id="adminTable" data-toggle="table" data-url="/admin/comment/list" data-height="600" data-response-handler="handlerData"
-                               data-pagination="true" data-mobile-responsive="true" cache="false">
+                               data-pagination="true" data-mobile-responsive="true" cache="false" data-search="true" data-show-columns="true">
                             <thead>
                             <tr>
-                                <th data-width="5%"><input name="checkAll" type="checkbox" value=""/></th>
+
+                                <th data-field="state" data-width="10%" data-checkbox="true"></th>
                                 <th data-field="cid" data-width="10%">ID</th>
                                 <th data-field="createTime" data-width="25%" >创建时间</th>
                                 <th data-field="content" data-width="15%">内容</th>
                                 <th data-field="userName" data-width="15%">留言人</th>
-                                <th data-field="state" data-width="10%" data-formatter="stateFormatter">状态</th>
+                                <th data-field="status" data-width="10%" data-formatter="stateFormatter">状态</th>
                                 <th data-width="20%" data-formatter="actionFormatter">操作</th>
                             </tr>
                             </thead>

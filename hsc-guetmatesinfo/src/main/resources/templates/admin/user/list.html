@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:shiro="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -19,25 +19,39 @@
 
         <div class="ibox-content">
             <div class="row row-lg">
-                <div class="col-sm-12">
-                    <!-- Example Toolbar -->
-                    <div class="example-wrap">
-                        <div class="example">
-                            <div class="btn-group hidden-xs" id="exampleSearchbar" role="group">
-                                <button data-toggle="modal" class="btn btn-outline btn-default" href="#modal-add-form" >
-                                    <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                                </button>
-                                <!--<button type="button" class="btn btn-outline btn-default">-->
-                                <!--<i class="glyphicon glyphicon-heart" aria-hidden="true"></i>-->
-                                <!--</button>-->
-                                <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                                </button>
-                            </div>
+                <div class="col-sm-12 search-collapse">
+                    <form id="user-form">
+                        <!--<input type="hidden" id="deptId" name="deptId">-->
+                        <!--<input type="hidden" id="parentId" name="parentId">-->
+                        <div class="select-list">
+                            <ul>
+                                <li>
+                                    用户名：<input type="text" name="loginName"/>
+                                </li>
+                                <li>
+                                    手机号码：<input type="text" name="phonenumber"/>
+                                </li>
+                                <!--<li>-->
+                                    <!--用户状态：<select name="status" th:with="type=${@dict.getType('sys_normal_disable')}">-->
+                                    <!--<option value="">所有</option>-->
+                                    <!--<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
+                                <!--</select>-->
+                                <!--</li>-->
+                                <!--<li class="select-time">-->
+                                    <!--<label>创建时间： </label>-->
+                                    <!--<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>-->
+                                    <!--<span>-</span>-->
+                                    <!--<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>-->
+                                <!--</li>-->
+                                <li>
+                                    <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                    <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-                    <!-- End Example Toolbar -->
+                    </form>
                 </div>
+
                 <div class="col-sm-12">
                     <div class="example">
 
@@ -71,38 +85,40 @@
             <div class="row row-lg">
                 <div class="col-sm-12">
                     <!-- Example Toolbar -->
-                    <div class="example-wrap">
-                        <div class="example">
-                            <div class="btn-group hidden-xs" id="exampleToolbar" role="group">
-                                <button data-toggle="modal" class="btn btn-outline btn-default" href="#modal-add-form" >
-                                    <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                                </button>
-                                <!--<button type="button" class="btn btn-outline btn-default">-->
-                                    <!--<i class="glyphicon glyphicon-heart" aria-hidden="true"></i>-->
-                                <!--</button>-->
-                                <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
+
+                    <div class="btn-group-sm" id="toolbar" role="group">
+                        <button data-toggle="modal" class="btn btn-primary" href="#modal-add-form" shiro:hasPermission="system:user:add">
+                            <i class="fa fa-plus"></i> 新增
+                        </button>
+                        <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:user:remove">
+                            <i class="fa fa-remove"></i> 删除
+                        </a>
+                        <a class="btn btn-info" onclick="$.table.importExcel()" shiro:hasPermission="system:user:import">
+                            <i class="fa fa-upload"></i> 导入
+                        </a>
+                        <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:user:export">
+                            <i class="fa fa-download"></i> 导出
+                        </a>
                     </div>
                     <!-- End Example Toolbar -->
                 </div>
+
                 <div class="col-sm-12">
                     <div class="example">
-                        <table id="adminTable" data-toggle="table" data-url="/admin/user/list" data-height="650" data-response-handler="handlerData"
-                               data-pagination="true" data-mobile-responsive="true" cache="false">
+                        <table id="adminTable" data-toggle="table" data-url="/admin/user/list" data-checkbox="true" data-height="850" data-response-handler="handlerData"
+                               data-pagination="true" data-mobile-responsive="true" cache="false" data-search="true" data-show-columns="true">
+
                             <thead>
                                 <tr>
-                                    <th data-width="5%"><input name="checkAll" type="checkbox" value="" /></th>
                                     <!--data-formatter="longFixFormatter"-->
-                                    <th data-field="id" data-width="10%" >ID</th>
+                                    <th data-field="state" data-width="5%" data-checkbox="true"></th>
+                                    <th data-field="id" data-width="5%" >ID</th>
                                     <th data-field="username" data-width="10%">用户名</th>
+                                    <th data-field="sname" data-width="10%">姓名</th>
                                     <th data-field="sex" data-width="5%" data-formatter="sexFormatter">性别</th>
                                     <th data-field="phone" data-width="15%">手机</th>
                                     <th data-field="remarks" data-width="20%">备注</th>
-                                    <th data-field="sname" data-width="10%">姓名</th>
-                                    <th data-field="state" data-width="5%" data-formatter="stateFormatter">状态</th>
+                                    <th data-field="status" data-width="5%" data-formatter="stateFormatter">状态</th>
                                     <th data-width="20%" data-formatter="actionFormatter">操作</th>
                                 </tr>
                             </thead>
@@ -172,7 +188,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-4 col-sm-offset-2">
                                             <button class="btn btn-primary" type="submit">保存内容</button>
-                                            <button class="btn btn-white" type="button" onclick="closeModal()">取消</button>
+                                            <button class="btn btn-white" type="button" data-dismiss="modal">取消</button>
                                         </div>
                                     </div>
                                 </form>
@@ -236,11 +252,10 @@
                                     <div class="form-group">
                                         <div class="col-sm-4 col-sm-offset-2">
                                             <button class="btn btn-primary" type="submit">保存内容</button>
-                                            <button class="btn btn-white" type="button" onclick="closeModal( )" >取消</button>
+                                            <button class="btn btn-white" type="button" data-dismiss="modal" >取消</button>
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
@@ -249,6 +264,9 @@
         </div>
     </div>
 </div>
+
+
+
 <script src="/js/jquery.min.js?v=2.1.4"></script>
 <script src="/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="/js/content.min.js?v=1.0.0"></script>

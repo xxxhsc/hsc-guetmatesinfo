@@ -5,6 +5,9 @@ import com.fcs.common.util.StringUtils;
 import com.fcs.common.util.bean.BeanUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
+import org.apache.shiro.subject.Subject;
 
 /**
  * @Author: hsc
@@ -12,7 +15,10 @@ import org.apache.shiro.session.Session;
  * @Date: 2020/5/6 22:59
  */
 public class ShiroUtils {
-
+    public static Subject getSubject()
+    {
+        return SecurityUtils.getSubject();
+    }
     public static Session getSession()
     {
         return SecurityUtils.getSubject().getSession();
@@ -32,4 +38,15 @@ public class ShiroUtils {
             return null;
         }
     }
+
+    public static void setSysUser(User user)
+    {
+        Subject subject = getSubject();
+        PrincipalCollection principalCollection = subject.getPrincipals();
+        String realmName = principalCollection.getRealmNames().iterator().next();
+        PrincipalCollection newPrincipalCollection = new SimplePrincipalCollection(user, realmName);
+        // 重新加载Principal
+        subject.runAs(newPrincipalCollection);
+    }
+
 }

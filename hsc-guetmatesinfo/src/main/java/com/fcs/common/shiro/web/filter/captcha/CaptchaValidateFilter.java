@@ -60,10 +60,8 @@ public class CaptchaValidateFilter extends AccessControlFilter
 
     public boolean validateResponse(HttpServletRequest request, String validateCode)
     {
-        System.out.println("验证码是："+validateCode);
         Object obj = ShiroUtils.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         String code = String.valueOf(obj != null ? obj : "");
-        System.out.println("code是："+code);
         if (StringUtils.isEmpty(validateCode) || !validateCode.equalsIgnoreCase(code))
         {
             return false;

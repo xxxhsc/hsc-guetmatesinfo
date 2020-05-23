@@ -75,7 +75,15 @@ public class ShiroConfiguration {
         securityManager.setCacheManager(ehCacheManager());
         return securityManager;
     }
-
+    /*
+     * 常用过滤器
+     * anon：无需认证
+     * authc：认证后可访问
+     * user：使用remember me可访问
+     * perms:该资源必须得到资源权限才可访问
+     * role：得到角色权限可访问
+     *
+     * */
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager  securityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -83,31 +91,23 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setLoginUrl("/");
         shiroFilterFactoryBean.setSuccessUrl("/");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
-/*
-* 常用过滤器
-* anon：无需认证
-* authc：认证后可访问
-* user：使用remember me可访问
-* perms:该资源必须得到资源权限才可访问
-* role：得到角色权限可访问
-*
-* */
         Map<String, String> filterChainDefinitionManager = new LinkedHashMap<>();
         filterChainDefinitionManager.put("/static/**", "anon");
         filterChainDefinitionManager.put("/templates/**", "anon");
         filterChainDefinitionManager.put("/login", "anon");
         filterChainDefinitionManager.put("/xyhd", "anon");
         filterChainDefinitionManager.put("/register","anon");
-        filterChainDefinitionManager.put(" /details","anon");
+        filterChainDefinitionManager.put("/details","anon");
+        filterChainDefinitionManager.put("/activitydetails","anon");
+        filterChainDefinitionManager.put("/captcha**", "anon");
         // 退出 logout地址，shiro去清除session
         filterChainDefinitionManager.put("/logout", "logout");
         filterChainDefinitionManager.put("/**.html", "authc");
         filterChainDefinitionManager.put("/index", "authc");
         filterChainDefinitionManager.put("/profile", "authc");
         filterChainDefinitionManager.put("/note", "authc");
-
+        filterChainDefinitionManager.put("/mate/**", "authc");
         filterChainDefinitionManager.put("/admin/**", "authc,roles[guetmates,admin]");
-
 
         Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
         filters.put("captchaValidate", captchaValidateFilter());
@@ -144,7 +144,7 @@ public class ShiroConfiguration {
     /**
      * 自定义验证码过滤器
      */
-    @Bean
+    @Bean(name = "captchaValidate")
     public CaptchaValidateFilter captchaValidateFilter()
     {
         CaptchaValidateFilter captchaValidateFilter = new CaptchaValidateFilter();

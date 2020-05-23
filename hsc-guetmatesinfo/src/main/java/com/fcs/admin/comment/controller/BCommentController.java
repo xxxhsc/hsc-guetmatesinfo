@@ -53,10 +53,10 @@ public class BCommentController {
 
     @RequestMapping("/changeState")
     @ResponseBody
-    public String changeState(long cid, int state) {
+    public String changeState(long cid, int status) {
         Comment comment = new Comment();
         comment.setCid(cid);
-        comment.setState(state);
+        comment.setStatus(status);
         commentService.updateById(comment);
         return "success";
     }

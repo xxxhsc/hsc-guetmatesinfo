@@ -30,15 +30,18 @@ public class User extends Model<User> {
 	private String username;
 	private String password;
 	private String phone;
-	private int state;
+	private int status;
 	private int sex;
 	private String remarks;
 	private String snumber;
 	private String sname;
 	private String smajor;
-	private String semail;
+	private String email;
 	private String scollege;
 	private String avatar;
+	private String workplace;
+	private String company;
+	private String post;
 	@TableField(exist = false)
 	private List<Role> roleList;
 
@@ -90,11 +93,11 @@ public class User extends Model<User> {
 	}
 
 	public int getState() {
-		return state;
+		return status;
 	}
 
-	public void setState(int state) {
-		this.state = state;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public List<Role> getRoleList() {

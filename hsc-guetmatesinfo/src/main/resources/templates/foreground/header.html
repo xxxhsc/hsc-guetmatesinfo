@@ -15,7 +15,7 @@
                             <ul class="nav navbar-top-links navbar-right welcome-message">
                                 <li class="dropdown user-menu">
                                     <a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
-                                        <img style="width:30px;height:30px" src="images/profile.jpg" class="img-circle" >
+                                        <img style="width:30px;height:30px" th:src="${user.avatar}" class="img-circle" >
                                         <span class="hidden-xs" th:text="${user.username}"></span>
                                     </a>
                                     <ul class="dropdown-menu">
@@ -23,11 +23,15 @@
                                             <a href="/profile" class="menuItem" data-index="64">
                                                 <i class="fa fa-user"></i> 个人资料</a>
                                         </li>
+                                        <li class="mt5">
+                                            <a href="/xyhd" class="menuItem" data-index="64">
+                                                <i class="fa fa-tasks"></i> 我的活动</a>
+                                        </li>
                                         <li>
-                                            <a onclick="resetPwd()">
+                                            <a  href="#"  id="resetPwd">
                                                 <i class="fa fa-key"></i> 修改密码</a>
                                         </li>
-                                        <li th:if="${user.roleList.size()>1}">
+                                        <li th:if="${user.roleList.size()!=1}">
                                             <a href="/admin">
                                                 <i class="fa fa-desktop"></i> 后台管理</a>
                                         </li>
@@ -185,7 +189,7 @@
             <h2>校友登录</h2>
             <form  method="post" action="/login">
                 <input type="text" value="" name="username" id="username" placeholder="用户名或邮箱" />
-                <input type="text" value="" name="password" id="password" placeholder="密码" />
+                <input type="password" value="" name="password" id="password" placeholder="密码" />
                 <input type="text" value="" name="validateCode" class="form-control code" placeholder="验证码" maxlength="5"  style="width:100px;" />
                 <a href="javascript:void(0);" title="点击更换验证码">
                     <img th:src="@{captcha/captchaImage(type=math)}" class="imgcode"  style="margin-bottom: 10px;float: right;"   width="35%"/>
@@ -213,6 +217,88 @@
         </div>
     </div>
 
+    <!--                login-popup-->
+    <div class="resetPwd-popup-wrapper">
+        <div id="resetPwd-popup">
+            <a href="#" class="close">关闭</a>
+            <h2>密码修改</h2>
+            <form  id="form-user-resetPwd" method="post" action="/resetPwd">
+                <label class="col-sm-3 control-label">旧密码：
+                <input type="password" value="" name="password" id="oldPassword"  placeholder="旧密码"  required/></label>
+                <label class="col-sm-3 control-label">新密码：
+                <input type="password" value="" name="password" id="newPassword" placeholder="新密码" required/></label>
+                <label class="col-sm-3 control-label">再次确认：
+                <input type="password" value="" name="password" id="confirm" placeholder="请再次输入您的密码"  required/></label>
+
+                <div class="row m-t" >
+
+                    <div class="col-xs-6">
+
+                    </div>
+                </div>
+
+                <br>
+                <br>
+                <input type="submit" class=""  value="确定" id="resetPwd-button"/>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- jquery-validate 表单验证插件 -->
+    <script src="js/register/jquery.validate.min.js"></script>
+    <script src="js/register/messages_zh.min.js"></script>
+    <script src="js/register/jquery.validate.extend.js"></script>
+<script>
+    $("#form-user-resetPwd").validate({
+        rules: {
+            oldPassword: {
+                required: true,
+                // remote: {
+                //     url: ctx + "system/user/profile/checkPassword",
+                //     type: "get",
+                //     dataType: "json",
+                //     data: {
+                //         password: function () {
+                //             return $("input[name='oldPassword']").val();
+                //         }
+                //     }
+                // }
+            },
+            newPassword: {
+                required: true,
+                minlength: 5,
+                maxlength: 20
+            },
+            confirm: {
+                required: true,
+                equalTo: "#newPassword"
+            }
+        },
+        messages: {
+            oldPassword: {
+                required: "请输入原密码",
+                remote: "原密码错误"
+            },
+            newPassword: {
+                required: "请输入新密码",
+                minlength: "密码不能小于6个字符",
+                maxlength: "密码不能大于20个字符"
+            },
+            confirm: {
+                required: "请再次输入新密码",
+                equalTo: "两次密码输入不一致"
+            }
+
+        },
+        focusCleanup: true
+    });
+    // function submitHandler() {
+    //     if ($.validate.form()) {
+    //         $.operate.save(ctx + "system/user/profile/resetPwd", $('#form-user-resetPwd').serialize());
+    //     }
+    // }
+</script>
 <script type="text/javascript">
     //Login
     //复选框二选一
@@ -228,7 +314,6 @@
     }
 
 </script>
-
 
 
 </nav>

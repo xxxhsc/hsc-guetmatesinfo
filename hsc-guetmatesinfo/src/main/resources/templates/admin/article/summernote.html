@@ -33,7 +33,6 @@
 
                 </select>
                 <select name="noticeType2" id="noticeType2" class="form-control m-b valid" aria-invalid="false"   >
-                    <!--<option th:each="dict2 : ${SencondTypeList}" th:text="${dict2.getLabel()}" th:value="${dict2.getId()}"></option>-->
                 </select>
             </div>
         </div>
@@ -58,6 +57,18 @@
                 </div>
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-10">
+                <a class="btn btn-info" onclick="$.table.importExcel()">
+                    <i class="fa fa-upload"></i> 发布
+                </a>
+                <a class="btn btn-danger multiple " >
+                    <i class="fa fa-remove"></i> 取消
+                </a>
+            </div>
+        </div>
+
     </form>
 </div>
 <script src="/js/jquery.min.js?v=2.1.4"></script>
@@ -73,7 +84,21 @@
 <script src="/js/admin/article.js"></script>
 <script src="/js/bootstrap-table.my.js"></script>
     <script type="text/javascript">
+        /** 消息状态码 */
+        web_status = {
+            SUCCESS: 0,
+            FAIL: 500,
+            WARNING: 301
+        };
 
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                var sHTML = $('.summernote').summernote('code');
+                $("#noticeContent").val(sHTML);
+                $.operate.save(prefix + "/add", $('#form-notice-add').serialize());
+            }
+        }
         //复选框二选一
         function CheckStatus(value) {
             if (value == 2) {
@@ -95,12 +120,6 @@
     </script>
 <!--
 <script type="text/javascript">
-    /** 消息状态码 */
-    web_status = {
-        SUCCESS: 0,
-        FAIL: 500,
-        WARNING: 301
-    };
 
 
 

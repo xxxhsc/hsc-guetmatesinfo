@@ -42,14 +42,14 @@
                     <h4 class="example-title">权限列表</h4>
                     <div class="example">
                         <table data-toggle="table" data-url="/admin/perm/list" data-height="600" data-response-handler="handlerData"
-                               data-pagination="true" data-mobile-responsive="true" cache="false">
+                               data-pagination="true" data-mobile-responsive="true" cache="false" data-search="true" data-show-columns="true">
                             <thead>
                             <tr>
-                                <th data-width="5%"><input name="checkAll" type="checkbox" value="" /></th>
+                                <th data-field="state" data-width="5%" data-checkbox="true"></th>
                                 <th data-field="id" data-width="15%">ID</th>
                                 <th data-field="name" data-width="15%">角色名</th>
                                 <th data-field="permission" data-width="15%">权限</th>
-                                <th data-field="state" data-width="10%" data-formatter="stateFormatter">状态</th>
+                                <!--<th data-field="status" data-width="10%" data-formatter="stateFormatter">状态</th>-->
                                 <th data-width="20%" >操作</th>
                             </tr>
                             </thead>

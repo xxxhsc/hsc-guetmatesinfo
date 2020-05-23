@@ -41,30 +41,26 @@
             <div class="row row-lg">
                 <div class="col-sm-12">
                     <!-- Example Toolbar -->
-                    <div class="example-wrap">
-                        <div class="example">
-                            <div class="btn-group hidden-xs" id="exampleToolbar" role="group">
-                                <button data-toggle="modal" class="btn btn-outline btn-default" href="#modal-add-form" >
-                                    <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                                </button>
-                                <!--<button type="button" class="btn btn-outline btn-default">-->
-                                <!--<i class="glyphicon glyphicon-heart" aria-hidden="true"></i>-->
-                                <!--</button>-->
-                                <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
+                    <div class="btn-group-sm" id="toolbar" role="group">
+                        <button class="btn btn-primary" data-toggle="modal" href="#modal-add-form">
+                            <i class="fa fa-plus"></i> 新增
+                        </button>
+                        <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()">
+                            <i class="fa fa-remove"></i> 删除
+                        </a>
+                        <a class="btn btn-info" onclick="$.table.importExcel()">
+                            <i class="fa fa-upload"></i> 导出
+                        </a>
                     </div>
                     <!-- End Example Toolbar -->
                 </div>
                 <div class="col-sm-12">
                     <div class="example">
                         <table id="adminTable" data-toggle="table" data-url="/admin/activity/list" data-height="650" data-response-handler="handlerData"
-                               data-pagination="true" data-mobile-responsive="true" cache="false">
+                               data-pagination="true" data-mobile-responsive="true" cache="false" data-search="true" data-show-columns="true">
                             <thead>
                             <tr>
-                                <th data-width="5%"><input name="checkAll" type="checkbox" value="" /></th>
+                                <th data-field="state" data-width="5%" data-checkbox="true"></th>
                                 <!--data-formatter="longFixFormatter"-->
                                 <th data-field="acid" data-width="5%" >活动ID</th>
                                 <th data-field="actitle" data-width="15%">活动标题</th>
@@ -72,7 +68,7 @@
                                 <th data-field="actimesize" data-width="15%">活动时间</th>
                                 <th data-field="acplace" data-width="15%">活动地点</th>
                                 <th data-field="acmatesize" data-width="5%">活动人数</th>
-                                <th data-field="state" data-width="5%" data-formatter="stateFormatter">状态</th>
+                                <th data-field="status" data-width="5%" data-formatter="stateFormatter">状态</th>
                                 <th data-width="20%" data-formatter="actionFormatter">操作</th>
                             </tr>
                             </thead>
@@ -130,6 +126,7 @@
                                             <input type="text" placeholder="备注信息" class="form-control" id="remark" name="remarks">
                                         </div>
                                     </div>
+
                                     <!--<div class="hr-line-dashed"></div>-->
                                     <!--<div class="form-group">-->
                                     <!--<label class="col-sm-2 control-label">禁用</label>-->
@@ -206,7 +203,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-4 col-sm-offset-2">
                                             <button class="btn btn-primary" type="submit">保存内容</button>
-                                            <button class="btn btn-white" type="button" onclick="closeModal( )" >取消</button>
+                                            <button class="btn btn-white" type="button" onclick="closeaddModal( )" >取消</button>
                                         </div>
                                     </div>
                                 </form>

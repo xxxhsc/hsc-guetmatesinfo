@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.fcs.admin.user.entity.User;
 import com.fcs.admin.user.service.IUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,10 +49,10 @@ public class UserController {
 
     @RequestMapping("/changeState")
     @ResponseBody
-    public String changeState(long id, int state) {
+    public String changeState(long id, int status) {
         User user = new User();
         user.setId(id);
-        user.setState(state);
+        user.setStatus(status);
         userService.updateById(user);
         return "success";
     }
@@ -81,14 +82,19 @@ public class UserController {
 
     @RequestMapping("/toCreate")
     public String toCreate(User user) {
-//        String md5Pwd = new Md5Hash(user.getPassword()).toString();
-//        user.setPassword(md5Pwd);
+      String md5Pwd = new Md5Hash(user.getPassword()).toString();
+       user.setPassword(md5Pwd);
         user.insert();
         return "toCreate";
     }
 
     @RequestMapping("/create")
     public Page<User> create(User user) {
+        user.insert();
+        return null;
+    }
+    @RequestMapping("/add")
+    public String add(User user) {
         user.insert();
         return null;
     }
@@ -133,12 +139,12 @@ public class UserController {
 //        return userService.selectById(1L);
 //    }
 
-    /**
-     * 分页 PAGE
-     */
-    @RequestMapping("/test3")
-    public Page<User> test3() {
-        return userService.selectPage(new Page<User>(0, 12));
-    }
+//    /**
+//     * 分页 PAGE
+//     */
+//    @RequestMapping("/test3")
+//    public Page<User> test3() {
+//        return userService.selectPage(new Page<User>(0, 12));
+//    }
 	
 }

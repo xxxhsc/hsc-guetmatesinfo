@@ -47,9 +47,9 @@
     <div class="container">
         <div class="row">
             <div class="span12">
-                <a href="">首页</a>
+                <a href="/">首页</a>
 
-                <span class="crum"><a href="">校友活动</a></span>
+                <span class="crum"><a href="">留言栏</a></span>
             </div>
         </div>
     </div>
@@ -93,7 +93,6 @@
 
 
                                     <a class="btn btn-primary " href="javascript:void(0)" id="sendcomment" onclick="sendcomment(this)">确定</a>
-
                                 <a  style="color: red"  class="author" id="errmsg">             </a>
 
 
@@ -113,9 +112,9 @@
                                             <div class=" ml-3  ">
                                                 <div class="container ml-2">
                                                     <a class="author">
-                                                        <span th:text="${comment.userName}">王也</span>
+                                                        <span th:text="${comment.userName}"></span>
                                                         <span class="summary-text small"
-                                                              th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm:ss')}">2020-04-10 16:01:27</span>
+                                                              th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm:ss')}"></span>
 
                                                         <a  href="javascript:void(0);"onclick="reply(this)"
                                                            th:attr="data-commentId=${comment.cid},data-nickName=${comment.userName},data-parentCommentId=${comment.parentCommentId!=null ? comment.parentCommentId:comment.cid}"><span
@@ -128,7 +127,7 @@
                                                     </a>
                                                 </div>
 
-                                                <div class="messageText ml-2 container m-2" th:text="${comment.content}">诸葛青，你败过吗？
+                                                <div class="messageText ml-2 container m-2" th:text="${comment.content}">
                                                 </div>
                                                 <!--  评论回复-->
                                                 <div class="p-1 comments m-3 border-left " th:if="${comment.replyComments.size()!=0}">
@@ -142,7 +141,7 @@
                                                             <div class="container ml-2">
 
                                                                 <a class="author ">
-                                                                    <span th:text="${reply.userName}">冯宝宝</span>
+                                                                    <span th:text="${reply.userName}"></span>
 
                                                                     <span class="summary-text small"
                                                                           th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm:ss')}">2020-04-10 16:01:27</span>

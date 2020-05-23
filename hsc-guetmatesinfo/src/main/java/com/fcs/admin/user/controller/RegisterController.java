@@ -32,7 +32,7 @@ public class RegisterController {
           }
           if (user.getUsername().equals(user1.getUsername())&&user.getScollege().equals(user1.getScollege())&&user.getSex()==user1.getSex()&&user.getSmajor().equals(user1.getSmajor()));{
           user1.setId(user.getId());
-          user1.setState(1);
+          user1.setStatus(1);
           userService.updateById(user1);
                 model.addAttribute("msg","用户认证成功");
             return "403";

@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns:shiro="http://www.w3.org/1999/xhtml" lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guet 文章管理</title>
-    <link rel="shortcut icon" href="favicon.ico">
+    <title>留言管理</title>
     <link href="/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
@@ -13,12 +11,11 @@
     <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 </head>
 
-<body class="gray-bg">
+<body class="gray-bg" onload="createCities()">
 <div class="wrapper wrapper-content animated fadeInRight">
-
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <h5>文章管理</h5>
+            <h5>留言管理</h5>
             <div class="ibox-tools">
                 <a class="collapse-link">
                     <i class="fa fa-chevron-up"></i>
@@ -41,36 +38,41 @@
             <div class="row row-lg">
                 <div class="col-sm-12">
                     <!-- Example Toolbar -->
-                    <div class="example-wrap">
-                        <div class="example">
-                            <div class="btn-group hidden-xs" id="exampleToolbar" role="group">
-                                <button data-toggle="modal" class="btn btn-outline btn-default" href="#modal-add-form" >
-                                    <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                                </button>
-                                <!--<button type="button" class="btn btn-outline btn-default">-->
-                                <!--<i class="glyphicon glyphicon-heart" aria-hidden="true"></i>-->
-                                <!--</button>-->
-                                <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
+                    <div class="btn-group-sm" id="toolbar" role="group">
+                        <a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="system:user:add">
+                            禁用
+                        </a>
+                        <a class="btn btn-info" onclick="$.table.importExcel()" shiro:hasPermission="system:user:import">
+                            启用
+                        </a>
+                        <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:user:remove">
+                            <i class="fa fa-remove"></i> 删除
+                        </a>
+                        <select name="noticeType1"  id="noticeType1" class="form-control m-b valid" aria-invalid="false">
+                            <option th:each="dict1 : ${FirstTypelist} " th:text="${dict1.getLabel()}" th:value="${dict1.getId()}"   onclick="createCities()"></option>
+
+                        </select>
+                        <select name="noticeType2" id="noticeType2" class="form-control m-b valid" aria-invalid="false"   >
+                            <!--<option th:each="dict2 : ${SencondTypeList}" th:text="${dict2.getLabel()}" th:value="${dict2.getId()}"></option>-->
+                        </select>
                     </div>
                     <!-- End Example Toolbar -->
+
                 </div>
                 <div class="col-sm-12">
+                    <h4 class="example-title">新闻动态列表</h4>
                     <div class="example">
                         <table id="adminTable" data-toggle="table" data-url="/admin/article/articlelist" data-height="650" data-response-handler="handlerData"
-                               data-pagination="true" data-mobile-responsive="true" cache="false">
+                               data-pagination="true" data-mobile-responsive="true" cache="false" data-search="true" data-show-columns="true" >
                             <thead>
                             <tr>
-                                <th data-width="5%"><input name="checkAll" type="checkbox" value="" /></th>
-                                <!--data-formatter="longFixFormatter"-->
+                                <th data-field="state" data-width="5%" data-checkbox="true"></th>
                                 <th data-field="aid" data-width="5%" >文章ID</th>
                                 <th data-field="atitle" data-width="15%">标题</th>
-                                <th data-field="atype" data-width="10%" >类型</th>
+                                <th data-field="atype" data-width="10%" data-formatter="typeFormatter">类型</th>
+                                <th data-field="acontent" data-width="15%">内容</th>
                                 <th data-field="createtime" data-width="15%">创建时间</th>
-                                <th data-field="state" data-width="5%" data-formatter="stateFormatter">状态</th>
+                                <th data-field="status" data-width="5%" data-formatter="stateFormatter">状态</th>
                                 <th data-width="20%" data-formatter="actionFormatter">操作</th>
                             </tr>
                             </thead>
@@ -79,6 +81,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <!-- End Panel Basic -->
 </div>
@@ -227,7 +230,7 @@
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 <script src="/js/bootstrap-table.my.js"></script>
 <script src="/js/plugins/layer/layer.min.js"></script>
-<script src="/js/admin/article.js"></script>
+<script src="/js/admin/articlelist.js"></script>
 
 
 
